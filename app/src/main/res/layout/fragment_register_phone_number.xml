@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contact_number" />
+
+    <EditText
+        android:id="@+id/etPhone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/editview_height"
+        android:layout_marginTop="10dp"
+        android:background="@mipmap/login_input"
+        android:ems="10"
+        android:hint="@string/input_contact_number"
+        android:inputType="phone"
+        android:paddingLeft="5dp" >
+    </EditText>
+
+</LinearLayout>

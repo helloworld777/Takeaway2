@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="@dimen/register_textview_width"
+            android:layout_height="wrap_content"
+            android:text="@string/username" />
+
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/editview_height"
+            android:layout_marginTop="5dip"
+            android:background="@mipmap/login_input"
+            android:hint="@string/input_username"
+            android:inputType="text"
+            android:paddingLeft="5dp" >
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="@dimen/register_textview_width"
+            android:layout_height="wrap_content"
+            android:text="@string/password" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/editview_height"
+            android:layout_marginTop="5dip"
+            android:background="@mipmap/login_input"
+            android:ems="10"
+            android:hint="@string/input_password"
+            android:inputType="textPassword"
+            android:paddingLeft="5dp" >
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+         android:visibility="gone"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="@dimen/register_textview_width"
+            android:layout_height="wrap_content"
+            android:text="@string/input_password2" />
+
+        <EditText
+            android:id="@+id/etPassword2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/editview_height"
+            android:layout_marginTop="5dip"
+            android:background="@mipmap/login_input"
+            android:ems="10"
+            android:hint="@string/input_password2"
+            android:inputType="textPassword"
+            android:visibility="gone"
+            android:paddingLeft="5dp" >
+        </EditText>
+    </LinearLayout>
+
+</LinearLayout>

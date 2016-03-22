@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@mipmap/login_bg" >
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/common_blue_header_new" />
+	
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:layout_below="@+id/header"
+         android:id="@+id/mainFrame"
+        />
+    
+     <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/bg_loadbar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="8dip"
+        android:paddingRight="8dip" >
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="42dip"
+            android:layout_marginRight="9dip"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bottombar"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textSize="@dimen/login_font_size" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="42dip"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bottombar"
+            android:text="@string/next"
+            android:textSize="@dimen/login_font_size" />
+    </LinearLayout>
+
+</RelativeLayout>
