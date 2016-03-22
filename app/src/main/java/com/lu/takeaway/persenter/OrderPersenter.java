@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.listener.SaveListener;
 import util.DateUtil;
 import util.Debug;
 import util.JSONHelpUtil;
@@ -50,9 +49,10 @@ public class OrderPersenter {
                 List<OrderBean> orderBeens=resolveOrderFromJson(responseInfo.result);
                 int maxId=0;
                 for(OrderBean orderBean:orderBeens){
-                    maxId=(maxId>orderBean.id?maxId:orderBean.id);
+                    maxId=(maxId>orderBean.oid?maxId:orderBean.oid);
                 }
                 Debug.d(OrderPersenter.this,"maxId:"+maxId);
+                Debug.d(OrderPersenter.this,"data:"+responseInfo.result);
                 DingDanApplication.getDefault().setMaxOrderId(maxId);
             }
 
@@ -74,23 +74,25 @@ public class OrderPersenter {
         for(OrderBean bean:orderBeanList){
             bean.odate= DateUtil.formateDate();
             objects.add(bean);
+
+            commitOrder("lyw",bean);
         }
-        new BmobObject().insertBatch(context,objects,new SaveListener() {
-            @Override
-            public void onSuccess() {
-                if(getiView() !=null){
-                    getiView().loadDataSuccess();
-                }
-                Debug.d(OrderPersenter.this,"批量添加成功");
-            }
-            @Override
-            public void onFailure(int code, String msg) {
-                if(getiView() !=null){
-                    getiView().loadDataFaild();
-                }
-                Debug.d(OrderPersenter.this,"批量添加失败:"+msg);
-            }
-        });
+//        new BmobObject().insertBatch(context,objects,new SaveListener() {
+//            @Override
+//            public void onSuccess() {
+//                if(getiView() !=null){
+//                    getiView().loadDataSuccess();
+//                }
+//                Debug.d(OrderPersenter.this,"批量添加成功");
+//            }
+//            @Override
+//            public void onFailure(int code, String msg) {
+//                if(getiView() !=null){
+//                    getiView().loadDataFaild();
+//                }
+//                Debug.d(OrderPersenter.this,"批量添加失败:"+msg);
+//            }
+//        });
 
 
     }
@@ -121,12 +123,18 @@ public class OrderPersenter {
     class CommitOrderCallBack extends RequestCallBack<String> {
         @Override
         public void onSuccess(ResponseInfo<String> responseInfo) {
-            iOrderView.getOrderBeanSuccess(resolveOrderFromJson(responseInfo.result));
+            Debug.d(OrderPersenter.this,"data:"+responseInfo.result);
+            if(iView!=null){
+                iView.loadDataSuccess();
+            }
         }
 
         @Override
         public void onFailure(HttpException e, String s) {
-            iOrderView.getOrderBeanFaild();
+            Debug.d(OrderPersenter.this,"data:"+s);
+            e.printStackTrace();
+            if(iView!=null)
+                iView.loadDataFaild();
         }
     }
     private List<OrderBean> resolveOrderFromJson(String json){

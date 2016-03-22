@@ -224,8 +224,16 @@ public class MainFragment extends BaseFragment implements IFoodView {
 				bitmapUtils.configDefaultLoadFailedImage(R.mipmap.menu_icon_home);
 				bitmapUtils.display(helper.getView(R.id.itemPicture), item.pictureUrl);
 			}
+			boolean isBooked=false;
+			for(OrderBean orderBean:mContext.getSelectedOrderBean()){
+				if(orderBean.ofoodname.equals(item.name)){
+					isBooked=true;
+					break;
+				}
+			}
 
 //			btnDianCai.setText(getString(item.isOrdered() ? R.string.ordered : R.string.dingcai));
+			btnDianCai.setText(isBooked ? R.string.ordered : R.string.dingcai);
 			btnDianCai.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -234,8 +242,8 @@ public class MainFragment extends BaseFragment implements IFoodView {
 //
 						OrderBean orderBean = new OrderBean();
 
-						orderBean.id= mContext.getMaxOrderId()+1;
-						mContext.setMaxOrderId(orderBean.id);
+						orderBean.oid= mContext.getMaxOrderId()+1;
+						mContext.setMaxOrderId(orderBean.oid);
 						orderBean.oprice=item.price*item.sale;
 						orderBean.onumber=1;
 						orderBean.odate=DateUtil.formateDate();
@@ -319,6 +327,8 @@ public class MainFragment extends BaseFragment implements IFoodView {
 	public void currentSelected() {
 		// TODO Auto-generated method stub
 		LogUtil.d(TAG, "currentSelected");
+
+
 		luAdapter.notifyDataSetChanged();
 	}
 }

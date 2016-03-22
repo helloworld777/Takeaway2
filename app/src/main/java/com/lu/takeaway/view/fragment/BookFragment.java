@@ -29,7 +29,7 @@ import util.LogUtil;
 
 @SuppressLint("NewApi")
 public class BookFragment extends BaseFragment implements OnClickListener,IView {
-	protected static final String TAG = "OrderFragment";
+	protected static final String TAG = "BookFragment";
 	private ListView listView;
 	private OrderAdapter adapter;
 //	private OrderManager orderManager;
@@ -91,6 +91,7 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 //		orderPersenter.queryOrder("lyw");
 		foodNumber = 0;
 		totalPrice = 0;
+		orderBeanList=mContext.getSelectedOrderBean();
 		adapter.replaceAll(orderBeanList);
 
 		if (orderBeanList.size() == 0) {

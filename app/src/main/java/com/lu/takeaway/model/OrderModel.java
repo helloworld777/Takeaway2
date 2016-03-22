@@ -21,7 +21,7 @@ public class OrderModel extends BaseModel{
         params.addBodyParameter("ofoodname",order.ofoodname);
         params.addBodyParameter("oprice",String.valueOf(order.oprice));
         params.addBodyParameter("onumber",String.valueOf(order.onumber));
-        params.addBodyParameter("onumber",String.valueOf(order.id));
+        params.addBodyParameter("oid",String.valueOf(order.oid));
         postRequest(INSERT_ORDER_URL,params,callBack);
     }
 }
