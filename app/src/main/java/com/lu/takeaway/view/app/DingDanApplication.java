@@ -9,7 +9,9 @@ import com.lu.takeaway.bean.UserBean;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.push.BmobPush;
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobInstallation;
 import util.Constants;
 import util.Debug;
 import util.FileUtils;
@@ -28,6 +30,10 @@ public class DingDanApplication extends Application {
 		setSelectedOrderBean(new ArrayList<OrderBean>());
 
 		Bmob.initialize(this, Constants.Bmob_APPID);
+		// 使用推送服务时的初始化操作
+		BmobInstallation.getCurrentInstallation(this).save();
+		// 启动推送服务
+		BmobPush.startWork(this);
 		Debug.d(this,"onCreate..............");
 	}
 	public static DingDanApplication getDefault(){

@@ -66,8 +66,9 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 
 		btnDingDan.setOnClickListener(this);
 		adapter = new OrderAdapter(getActivity(), orderBeanList, R.layout.item_menu_listview);
+		setListViewEmptyView(listView,null);
 		listView.setAdapter(adapter);
-		listView.setEmptyView(createEmpty(null));
+
 		Debug.d(this,"onCreateView..............");
 
 		return view;
@@ -195,34 +196,11 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 
 				@Override
 				public void onClick(DialogInterface arg0, int arg1) {
-
 					orderPersenter.commitOrder(getActivity(),"");
-//					OrderBeanManager manager = new OrderBeanManager();
-//					for (OrderBean bean : orderManager.getOrders()) {
-//						bean.setId(_id++);
-//						System.out.println(bean.getId());
-//						manager.commitOrder(bean, new RequestCallBack<String>() {
-//							@Override
-//							public void onSuccess(ResponseInfo<String> arg0) {
-//								DialogUtil.showToast(getActivity(), "success");
-//								orderManager.getOrders().clear();
-//								FoodManager.getDefault().setFoodBeansNoOrder();
-//								initData();
-//							}
-//
-//							@Override
-//							public void onFailure(HttpException arg0, String arg1) {
-//								DialogUtil.showToast(getActivity(), "faild");
-//								arg0.printStackTrace();
-//							}
-//						});
-//					}
-//					SaveDataUtil.putInt(getActivity(), ORDER_ID, _id);
 				}
 
 			});
 			break;
-
 		default:
 			break;
 		}

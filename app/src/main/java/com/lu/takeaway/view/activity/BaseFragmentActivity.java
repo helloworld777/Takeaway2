@@ -3,9 +3,11 @@ package com.lu.takeaway.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
@@ -42,14 +44,18 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	protected void showToast(String msg){
 		TopNoticeDialog.showToast(this,msg);
 	}
-	protected TextView createEmpty(String emptyTips){
-		TextView textView=new TextView(this);
+	protected TextView setListViewEmptyView(ListView listview, String emptyTips){
+		TextView emptyView =new TextView(this);
+		emptyView .setGravity(Gravity.CENTER);
 		ViewGroup.LayoutParams layoutParams=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-		textView.setLayoutParams(layoutParams);
+		emptyView .setLayoutParams(layoutParams);
 		if(null==emptyTips){
 			emptyTips=String.valueOf(getText(R.string.empty_data));
 		}
-		textView.setText(emptyTips);
-		return textView;
+		emptyView .setText(emptyTips);
+		emptyView .setVisibility(View.GONE);
+		((ViewGroup)listview.getParent()).addView(emptyView);
+		listview.setEmptyView(emptyView );
+		return emptyView ;
 	}
 }

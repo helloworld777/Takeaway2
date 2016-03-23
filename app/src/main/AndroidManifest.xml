@@ -7,6 +7,19 @@
     <uses-library android:name="android.test.runner" />
     <uses-permission android:name="android.permission.RUN_INSTRUMENTATION" />
 
+
+    <!-- BmobPush SDK权限 -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+
     <application
         android:name=".view.app.DingDanApplication"
         android:allowBackup="true"
@@ -39,7 +52,38 @@
         </activity>
 
         <!-- alipay sdk end -->
+
+
+        <!-- receiver bmob push message -->
+        <receiver android:name=".view.receiver.MyPushMessageReceiver">
+            <intent-filter >
+                <action android:name="cn.bmob.push.action.MESSAGE"></action>
+            </intent-filter>
+        </receiver>
+
+        <!-- BmobPush service and receiver begin-->
+        <service
+            android:label="PushService"
+            android:name="cn.bmob.push.lib.service.PushService"
+            android:process="cn.bmob.push"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="cn.bmob.push.lib.service.PushService"/>
+            </intent-filter>
+        </service>
+
+        <receiver android:name="cn.bmob.push.PushReceiver" >
+            <intent-filter>
+                <!-- 系统启动完成后会调用 -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <!-- 解锁完成后会调用 -->
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <!-- 监听网络连通性 -->
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- BmobPush service and receiver end-->
     </application>
-    <instrumentation android:name="android.test.InstrumentationTestRunner"
-        android:targetPackage="com.lu.takeaway" android:label="Tests for My App" />
+
 </manifest>

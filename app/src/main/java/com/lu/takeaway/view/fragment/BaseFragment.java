@@ -2,8 +2,10 @@ package com.lu.takeaway.view.fragment;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.lu.takeaway.R;
@@ -40,14 +42,18 @@ public abstract class BaseFragment extends Fragment {
 		startActivityForResult(intent, requestCode);
 		getActivity().overridePendingTransition(R.anim.out_to_left, R.anim.in_from_right);
 	}
-	protected TextView createEmpty(String emptyTips){
-		TextView textView=new TextView(getActivity());
+	protected TextView setListViewEmptyView( ListView listview,String emptyTips){
+		TextView emptyView =new TextView(getActivity());
+		emptyView .setGravity(Gravity.CENTER);
 		ViewGroup.LayoutParams layoutParams=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-		textView.setLayoutParams(layoutParams);
+		emptyView .setLayoutParams(layoutParams);
 		if(null==emptyTips){
 			emptyTips=String.valueOf(getText(R.string.empty_data));
 		}
-		textView.setText(emptyTips);
-		return textView;
+		emptyView .setText(emptyTips);
+		emptyView .setVisibility(View.GONE);
+		((ViewGroup)listview.getParent()).addView(emptyView);
+		listview.setEmptyView(emptyView );
+		return emptyView ;
 	}
 }
