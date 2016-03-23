@@ -216,7 +216,6 @@ public class MainFragment extends BaseFragment implements IFoodView {
 				@Override
 				public void onClick(View arg0) {
 					if (btnDianCai.getText().equals(getString(R.string.dingcai))) {
-//
 						OrderBean orderBean = new OrderBean();
 
 						orderBean.oid= mContext.getMaxOrderId()+1;
@@ -226,8 +225,9 @@ public class MainFragment extends BaseFragment implements IFoodView {
 						orderBean.odate=DateUtil.formateDate();
 						orderBean.ofoodname=item.name;
 						orderBean.ousername=mContext.getCurrenUserBean().getUsername();
+						orderBean.opicture=item.pictureUrl;
+						orderBean.ofinished=getString(R.string.orderUnFinish);
 						mContext.getSelectedOrderBean().add(orderBean);
-//
 						btnDianCai.setText(getString(R.string.ordered));
 					}
 				}

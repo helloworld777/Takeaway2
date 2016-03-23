@@ -109,9 +109,10 @@ public class OrderPersenter {
         @Override
         public void onSuccess(ResponseInfo<String> responseInfo) {
             if(iOrderView!=null){
-                iOrderView.getOrderBeanSuccess(resolveOrderFromJson(responseInfo.result));
+//                List<OrderBean> orderBeanList=resolveOrderFromJson(responseInfo.result);
+//                List<OrderBean> sortOrderBeanList=sortOrder(orderBeanList);
+                iOrderView.getOrderBeanSuccess(sortOrder(resolveOrderFromJson(responseInfo.result)));
             }
-
         }
 
         @Override
@@ -119,6 +120,48 @@ public class OrderPersenter {
             if(iOrderView!=null)
             iOrderView.getOrderBeanFaild();
         }
+    }
+    public  static void main(String[] arges){
+        List<String> list=new ArrayList<>() ;
+
+    }
+    private List<OrderBean> sortOrder(List<OrderBean> orderBeanList){
+
+        List<OrderBean> tempOrder=new ArrayList<>();
+        boolean isRemove=false;
+        for(int i=0,size=orderBeanList.size();i<orderBeanList.size();i=(isRemove?i:i+1)){
+
+//            if(isRemove){
+//                i--;
+//            }
+            if(orderBeanList.get(i).ofinished.equals("未派送")){
+                tempOrder.add(orderBeanList.remove(i));
+                isRemove=true;
+            }else{
+                isRemove=false;
+            }
+        }
+        isRemove=false;
+        for(int i=0,size=orderBeanList.size();i<orderBeanList.size();i=(isRemove?i:i+1) ){
+//            if(isRemove){
+//                i--;
+//            }
+            if(orderBeanList.get(i).ofinished.equals("已派送")){
+                tempOrder.add(orderBeanList.remove(i));
+                isRemove=true;
+            }else{
+                isRemove=false;
+            }
+        }
+        tempOrder.addAll(orderBeanList);
+//        for(int i=0,size=orderBeanList.size();i<size;i++ ){
+//
+//            if(orderBeanList.get(i).ofinished.equals("已完成")){
+//                tempOrder.add(orderBeanList.remove(i));
+//            }
+//        }
+
+        return tempOrder;
     }
     class CommitOrderCallBack extends RequestCallBack<String> {
         @Override

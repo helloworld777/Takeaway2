@@ -54,7 +54,7 @@
 
             <Button
                 android:id="@+id/btnHome"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:drawableLeft="@drawable/home_menu_home_icon"
@@ -73,7 +73,7 @@
 
             <Button
 
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:drawableLeft="@drawable/home_menu_order_list_icon"
@@ -91,7 +91,7 @@
 
             <Button
 
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:drawableLeft="@drawable/home_menu_gift_icon"
@@ -111,7 +111,7 @@
 
             <Button
                 android:id="@+id/btn_abouts"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:drawableLeft="@drawable/home_menu_aboutus_icon"

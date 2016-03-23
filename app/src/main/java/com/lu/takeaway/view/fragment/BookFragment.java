@@ -26,6 +26,7 @@ import java.util.List;
 import util.Debug;
 import util.DialogUtil;
 import util.LogUtil;
+import util.StringUtil;
 
 @SuppressLint("NewApi")
 public class BookFragment extends BaseFragment implements OnClickListener,IView {
@@ -66,6 +67,7 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 		btnDingDan.setOnClickListener(this);
 		adapter = new OrderAdapter(getActivity(), orderBeanList, R.layout.item_menu_listview);
 		listView.setAdapter(adapter);
+		listView.setEmptyView(createEmpty(null));
 		Debug.d(this,"onCreateView..............");
 
 		return view;
@@ -103,13 +105,13 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 	}
 	private void isExistBook(){
 		if (orderBeanList.size() == 0) {
-			tvNoOrderTips.setVisibility(View.VISIBLE);
+//			tvNoOrderTips.setVisibility(View.VISIBLE);
 			rlDiancai.setVisibility(View.GONE);
-			listView.setVisibility(View.GONE);
+//			listView.setVisibility(View.GONE);
 		} else {
-			tvNoOrderTips.setVisibility(View.GONE);
+//			tvNoOrderTips.setVisibility(View.GONE);
 			rlDiancai.setVisibility(View.VISIBLE);
-			listView.setVisibility(View.VISIBLE);
+//			listView.setVisibility(View.VISIBLE);
 		}
 
 	}
@@ -137,6 +139,7 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 			helper.setString(R.id.tvFoodName, item.ofoodname);
 			helper.setString(R.id.tvFoodPrice, "$" + item.oprice);
 			helper.setString(R.id.tvFoodNum, "" + item.onumber);
+			mContext.getBitmapUtils().display(helper.getView(R.id.ivFoodPic),item.opicture);
 		}
 
 		@Override
@@ -168,9 +171,9 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 			bean.onumber--;
 		}
 		foodNumber--;
-		totalPrice -= bean.oprice*bean.onumber;
+		totalPrice -= bean.getTotalPrice();
 		tvTotalFoodNumber.setText("" + foodNumber);
-		tvTotalPrice.setText("$" + totalPrice);
+		tvTotalPrice.setText("$" + StringUtil.formatNumber(totalPrice));
 		adapter.notifyDataSetChanged();
 	}
 	private void addNumber(int position) {
@@ -178,7 +181,7 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 		bean.onumber++;
 
 		foodNumber++;
-		totalPrice += bean.oprice*bean.onumber;
+		totalPrice += bean.getTotalPrice();
 		tvTotalFoodNumber.setText("" + foodNumber);
 		tvTotalPrice.setText("$" + totalPrice);
 

@@ -1,6 +1,5 @@
 package com.lu.takeaway.view.app;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.lidroid.xutils.BitmapUtils;
@@ -13,21 +12,19 @@ import java.util.List;
 import cn.bmob.v3.Bmob;
 import util.Constants;
 import util.Debug;
+import util.FileUtils;
 
 public class DingDanApplication extends Application {
 	private static DingDanApplication danApplication;
 	private UserBean currenUserBean;
-//	private OrderBean orderBean;
 	private BitmapUtils bitmapUtils;
-	@SuppressLint("SdCardPath") 
-	private String diskCachePath="/sdcard/lu/dingdan/images";
 	private List<OrderBean> selectedOrderBean;
 	private int maxOrderId;
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		danApplication=this;
-		setBitmapUtils(new BitmapUtils(getApplicationContext(),diskCachePath));
+		setBitmapUtils(new BitmapUtils(getApplicationContext(), FileUtils.imgPathPath()));
 		setSelectedOrderBean(new ArrayList<OrderBean>());
 
 		Bmob.initialize(this, Constants.Bmob_APPID);

@@ -8,92 +8,92 @@
         android:id="@+id/header"
         layout="@layout/common_header_order" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:orientation="horizontal"
-        android:visibility="gone" >
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:visibility="gone" >-->
 
-        <TextView
-            android:layout_width="148dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="食品" />
+        <!--<TextView-->
+            <!--android:layout_width="148dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:text="食品" />-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:layout_toLeftOf="@+id/tvDate"
-            android:text="数量" />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:layout_toLeftOf="@+id/tvDate"-->
+            <!--android:text="数量" />-->
 
-        <TextView
-            android:id="@+id/tvDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:layout_toLeftOf="@+id/tvFinished"
-            android:text="时间" />
+        <!--<TextView-->
+            <!--android:id="@+id/tvDate"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:layout_toLeftOf="@+id/tvFinished"-->
+            <!--android:text="时间" />-->
 
-        <TextView
-            android:id="@+id/tvFinished"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="配送情况" />
-    </RelativeLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/tvFinished"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:text="配送情况" />-->
+    <!--</RelativeLayout>-->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:visibility="gone" >
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:visibility="gone" >-->
 
-        <ImageView
-            android:id="@+id/iv"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginRight="5dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/ic_launcher" />
+        <!--<ImageView-->
+            <!--android:id="@+id/iv"-->
+            <!--android:layout_width="48dp"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:src="@mipmap/ic_launcher" />-->
 
-        <TextView
-            android:id="@+id/tvFoodName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/iv"
-            android:text="点的菜名"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <!--<TextView-->
+            <!--android:id="@+id/tvFoodName"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_toRightOf="@+id/iv"-->
+            <!--android:text="点的菜名"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
 
-        <TextView
-            android:id="@+id/tvFoodCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/tvDate"
-            android:text="1" />
+        <!--<TextView-->
+            <!--android:id="@+id/tvFoodCount"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_toLeftOf="@+id/tvDate"-->
+            <!--android:text="1" />-->
 
-        <TextView
-            android:id="@+id/tvDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/tvFinished"
-            android:gravity="right"
-            android:text="8-4 21:55" />
+        <!--<TextView-->
+            <!--android:id="@+id/tvDate"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_toLeftOf="@+id/tvFinished"-->
+            <!--android:gravity="right"-->
+            <!--android:text="8-4 21:55" />-->
 
-        <TextView
-            android:id="@+id/tvFinished"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="已配送" />
-    </RelativeLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/tvFinished"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:text="已配送" />-->
+    <!--</RelativeLayout>-->
 
     <ListView
         android:id="@+id/listview"
@@ -107,7 +107,7 @@
         android:layout_height="match_parent" 
         android:gravity="center"
         android:text="您还没有订单信息..."
-         android:visibility="gone">
+        android:visibility="gone">
     </TextView>
 
 </LinearLayout>

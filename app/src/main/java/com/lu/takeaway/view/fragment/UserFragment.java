@@ -68,26 +68,22 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.tvLogin:
-			if(!isLogin){
-				getActivity().startActivityForResult(new Intent(getActivity(),LoginActivity.class), REQUESTCODE_MAIN_LOGIN);
-			}
-			break;
+			case R.id.tvLogin:
+				if(!isLogin){
+					startActivityForResultTransition(new Intent(getActivity(),LoginActivity.class), REQUESTCODE_MAIN_LOGIN);
+				}
+				break;
 			case R.id.rlAbout:
 				break;
 			case R.id.rlBook:
 				break;
 			case R.id.rlOrder:
-							if(!isLogin){
-				getActivity().startActivityForResult(new Intent(getActivity(),LoginActivity.class), REQUESTCODE_MAIN_LOGIN);
-			}else{
-				startActivity(new Intent(getActivity(),OrderActivity.class));
-			}
+				if(!isLogin){
+					startActivityForResultTransition(LoginActivity.class, REQUESTCODE_MAIN_LOGIN);
+				}else{
+					startActivityTransition(OrderActivity.class);
+				}
 				break;
-//		case R.id.btnOrder:
-
-//
-//			break;
 		default:
 			break;
 		}

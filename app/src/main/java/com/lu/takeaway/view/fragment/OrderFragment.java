@@ -123,10 +123,6 @@ public class OrderFragment extends BaseFragment implements OnClickListener,IOrde
 		showToast("getOrderBeanFaild");
 	}
 
-	@Override
-	public void commitOrder(OrderBean orderBean) {
-
-	}
 
 	class OrderAdapter extends LuAdapter<OrderBean> {
 		public OrderAdapter(Context context, List<OrderBean> datas, int mItemLayoutId) {

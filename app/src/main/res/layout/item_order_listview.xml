@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp" >
+        android:padding="@dimen/size10dp" >
 
 
         <ImageView
@@ -22,19 +22,26 @@
             android:id="@+id/tvFoodName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/image"
+            android:layout_marginTop="@dimen/size5dp"
             android:text="点的菜名"
             android:textColor="#000000"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/tvFoodCount"
+            android:layout_toRightOf="@+id/image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/tvDate"
+            android:layout_below="@+id/tvFoodName"
+            android:text="1" />
+        <TextView
+            android:id="@+id/tvFoodTotalPrice"
+            android:layout_toRightOf="@+id/tvFoodCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvFoodName"
+            android:layout_marginLeft="@dimen/size10dp"
             android:text="1" />
 
         <TextView

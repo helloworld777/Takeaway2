@@ -3,6 +3,10 @@
     package="com.lu.takeaway" >
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-library android:name="android.test.runner" />
+    <uses-permission android:name="android.permission.RUN_INSTRUMENTATION" />
+
     <application
         android:name=".view.app.DingDanApplication"
         android:allowBackup="true"
@@ -36,5 +40,6 @@
 
         <!-- alipay sdk end -->
     </application>
-
+    <instrumentation android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.lu.takeaway" android:label="Tests for My App" />
 </manifest>

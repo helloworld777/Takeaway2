@@ -4,16 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lu.takeaway.R;
+
+import util.TopNoticeDialog;
 
 public abstract class BaseFragmentActivity extends FragmentActivity {
 	protected final int  requestCode=0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		ViewUtils.inject(this);
@@ -35,5 +38,18 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	}
 	protected void startActivityForResultTransition(Intent intent) {
 		startActivityForResult(intent, requestCode);
+	}
+	protected void showToast(String msg){
+		TopNoticeDialog.showToast(this,msg);
+	}
+	protected TextView createEmpty(String emptyTips){
+		TextView textView=new TextView(this);
+		ViewGroup.LayoutParams layoutParams=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+		textView.setLayoutParams(layoutParams);
+		if(null==emptyTips){
+			emptyTips=String.valueOf(getText(R.string.empty_data));
+		}
+		textView.setText(emptyTips);
+		return textView;
 	}
 }

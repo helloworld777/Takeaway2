@@ -10,6 +10,4 @@ import java.util.List;
 public interface IOrderView {
      void getOrderBeanSuccess(List<OrderBean> orderBeanList);
      void getOrderBeanFaild();
-     void commitOrder(OrderBean orderBean);
-//     void
 }

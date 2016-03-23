@@ -4,7 +4,11 @@
     <string name="app_name">Takeaway</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-	
+
+    <string name="orderFinished">已完成</string>
+    <string name="orderFinishing">已派送</string>
+    <string name="orderUnFinish">未派送</string>
+
     <string name="home">首页</string>
     <string name="order">订单</string>
     <string name="book">预订</string>
@@ -76,7 +80,7 @@
     <string name="food_search">菜单搜索</string>
     <string name="no_search_tips">抱歉,没有此食物,搜搜其他的试试.</string>
     
-    
+    <string name="empty_data">没有数据哦(⊙o⊙)</string>
     <string name="login_faild">登录失败,用户名或密码错误</string>
     
     <string name="load_data_faild">获取数据失败,请检查网络是否可用</string>
