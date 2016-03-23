@@ -30,11 +30,10 @@ import java.util.Date;
 import java.util.List;
 
 import bean.EventBean;
-import bean.Manager.FoodManager;
-import db.OrderManager;
 import de.greenrobot.event.EventBus;
 import util.DateUtil;
 import util.LogUtil;
+import util.StringUtil;
 
 @SuppressLint("NewApi")
 public class MainFragment extends BaseFragment implements IFoodView {
@@ -43,24 +42,15 @@ public class MainFragment extends BaseFragment implements IFoodView {
 	private XListView mineList;
 
 	private FoodAdapter luAdapter;
-//	private List<FoodBean> foodBeans;
-//
 	private List<FoodBean> allfoods=new ArrayList<>();
 
-//	private int count = 2;
-	private OrderManager orderManager;
 
-	private FoodManager foodManager;
 	private boolean refresh=true;
 	private BitmapUtils bitmapUtils;
 	private boolean isRefresh=false;
 	private FoodPersenter foodPersenter;
 	@SuppressLint("HandlerLeak")
-	private Handler mHandler = new Handler() {
-		public void handleMessage(android.os.Message msg) {
-
-		};
-	};
+	private Handler mHandler = new Handler();
 
 	public MainFragment() {
 		EventBus.getDefault().register(this);
@@ -74,10 +64,6 @@ public class MainFragment extends BaseFragment implements IFoodView {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_main, container, false);
 		mineList = (XListView) view.findViewById(R.id.mineList);
-//		orderManager = OrderManager.getDefault();
-//		foodManager = FoodManager.getDefault();
-//		foodBeans = new ArrayList<FoodBean>();
-//		allfoods=foodManager.getAllfoods();
 		luAdapter = new FoodAdapter(getActivity(), allfoods, R.layout.item_food_listview);
 		mineList.setAdapter(luAdapter);
 		mineList.setPullLoadEnable(false);
@@ -205,16 +191,7 @@ public class MainFragment extends BaseFragment implements IFoodView {
 //			helper.setBackgroundResource(R.id.itemPicture, item.getRes());
 			helper.setString(R.id.itemPrice, "$" + item.price);
 
-//			double d=1;
-//			double price=1;
-//			try{
-//				price=Double.parseDouble(item.price);
-//				d=Double.parseDouble(item.sale);
-//			}catch (Exception e){
-//				e.printStackTrace();
-//			}
-
-			helper.setString(R.id.itemSalePrice, "$" + item.sale*item.price);
+			helper.setString(R.id.itemSalePrice, "$" + StringUtil.formatNumber(item.sale*item.price));
 			((TextView) helper.getView(R.id.itemPrice)).getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 
 			final Button btnDianCai = helper.getView(R.id.btnDianCai);
@@ -244,91 +221,25 @@ public class MainFragment extends BaseFragment implements IFoodView {
 
 						orderBean.oid= mContext.getMaxOrderId()+1;
 						mContext.setMaxOrderId(orderBean.oid);
-						orderBean.oprice=item.price*item.sale;
+						orderBean.oprice=Double.parseDouble(StringUtil.formatNumber(item.price*item.sale));
 						orderBean.onumber=1;
 						orderBean.odate=DateUtil.formateDate();
 						orderBean.ofoodname=item.name;
 						orderBean.ousername=mContext.getCurrenUserBean().getUsername();
 						mContext.getSelectedOrderBean().add(orderBean);
-//						orderBean.setFoodBean(item);
-//						LogUtil.d(TAG, "id:"+item.getId());
-//						orderBean.setId(orderManager.getOrders().size());
-//						orderBean.setNumber(1);
-//						orderBean.setDate(DateUtil.formateDate());
-//						orderBean.setNote("加急");
-//						orderBean.setFinished("未配送");
-//						orderBean.setUser(DingDanApplication.getDefault().getCurrenUserBean());
 //
 						btnDianCai.setText(getString(R.string.ordered));
-//						item.setOrdered(true);
-//
-//						orderManager.getOrders().add(orderBean);
-////						orderManager.getOrderBean().getGoods().add(arg0)
 					}
 				}
 			});
-//		@Override
-//		public void convert(ViewHolder helper, final FoodBean item) {
-//			helper.setString(R.id.itemName, item.getName());
-////			helper.setBackgroundResource(R.id.itemPicture, item.getRes());
-//			helper.setString(R.id.itemPrice, "$" + item.getPrice());
-//
-//			helper.setString(R.id.itemSalePrice, "$" + item.getSalePrice());
-//			((TextView) helper.getView(R.id.itemPrice)).getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-//
-//			final Button btnDianCai = helper.getView(R.id.btnDianCai);
-//
-//			LogUtil.d(TAG, "item.getPicture():"+item.getPicture());
-//			bitmapUtils.display(helper.getView(R.id.itemPicture), item.getPicture());
-//			btnDianCai.setText(getString(item.isOrdered() ? R.string.ordered : R.string.dingcai));
-//			btnDianCai.setOnClickListener(new OnClickListener() {
-//
-//				@Override
-//				public void onClick(View arg0) {
-//					// TODO Auto-generated method stub
-//					if (btnDianCai.getText().equals(getString(R.string.dingcai))) {
-//
-//						OrderBean orderBean = new OrderBean();
-//						orderBean.setFoodBean(item);
-//						LogUtil.d(TAG, "id:"+item.getId());
-//						orderBean.setId(orderManager.getOrders().size());
-//						orderBean.setNumber(1);
-//						orderBean.setDate(DateUtil.formateDate());
-//						orderBean.setNote("加急");
-//						orderBean.setFinished("未配送");
-//						orderBean.setUser(DingDanApplication.getDefault().getCurrenUserBean());
-//
-//						btnDianCai.setText(getString(R.string.ordered));
-//						item.setOrdered(true);
-//
-//						orderManager.getOrders().add(orderBean);
-////						orderManager.getOrderBean().getGoods().add(arg0)
-//					}
-//				}
-//			});
 
 		}
 
-		@Override
-		public void convert(ViewHolder helper, int position) {
-			// TODO Auto-generated method stub
-//			super.convert(helper, position);
-		}
-	}
-
-	public void onSuccess(String result) {
-//		Gson gson=new Gson();
-//		List<FoodBean> foodBeans=gson.fromJson(result, new TypeToken<List<FoodBean>>(){}.getType());
-//		foodManager.addFoodBeans(refresh,foodBeans);
-//		luAdapter.notifyDataSetChanged();
 	}
 
 	@Override
 	public void currentSelected() {
-		// TODO Auto-generated method stub
 		LogUtil.d(TAG, "currentSelected");
-
-
 		luAdapter.notifyDataSetChanged();
 	}
 }

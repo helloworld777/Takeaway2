@@ -99,7 +99,7 @@ public class MainActivity extends BaseFragmentActivity implements Constants,IUse
 		ivBack.setVisibility(View.GONE);
 //		userBean=(UserBean) getIntent().getSerializableExtra("userbean");
 		
-		mTextArray = new String[]{ getString(R.string.title_activity_main), getString(R.string.title_activity_order), getString(R.string.user) };
+		mTextArray = new String[]{ getString(R.string.title_activity_main), getString(R.string.title_activity_book), getString(R.string.user) };
 		mainFragment = new MainFragment();
 		userFragment = new UserFragment();
 		orderFragment = new BookFragment();

@@ -29,7 +29,7 @@
             android:layout_below="@+id/ivHome"
             android:layout_centerHorizontal="true"
             android:textColor="@color/menuSelected"
-            android:text="首页" >
+            android:text="@string/home" >
         </TextView>
     </RelativeLayout>
 
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivOrder"
             android:layout_centerHorizontal="true"
-            android:text="订单" >
+            android:text="@string/book" >
         </TextView>
     </RelativeLayout>
 
@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivUser"
             android:layout_centerHorizontal="true"
-            android:text="我的" >
+            android:text="@string/user" >
         </TextView>
     </RelativeLayout>
 

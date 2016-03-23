@@ -42,6 +42,7 @@ public class FoodPersenter extends BasePersenter{
 
         @Override
         public void onFailure(HttpException e, String s) {
+            e.printStackTrace();
             iFoodView.loadDataFaild();
         }
     }

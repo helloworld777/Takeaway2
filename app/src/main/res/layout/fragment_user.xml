@@ -45,6 +45,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/rlBook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
@@ -66,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-
+            android:id="@+id/rlOrder"
             android:paddingLeft="@dimen/size10dp"
             android:background="@drawable/bg_user_selector">
 
@@ -100,6 +101,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rlAbout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"

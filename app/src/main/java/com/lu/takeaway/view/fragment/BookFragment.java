@@ -68,7 +68,6 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 		listView.setAdapter(adapter);
 		Debug.d(this,"onCreateView..............");
 
-
 		return view;
 	}
 
@@ -91,19 +90,9 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 //		orderPersenter.queryOrder("lyw");
 		foodNumber = 0;
 		totalPrice = 0;
-		orderBeanList=mContext.getSelectedOrderBean();
-		adapter.replaceAll(orderBeanList);
-
-		if (orderBeanList.size() == 0) {
-
-			tvNoOrderTips.setVisibility(View.VISIBLE);
-			rlDiancai.setVisibility(View.GONE);
-			listView.setVisibility(View.GONE);
-		} else {
-			tvNoOrderTips.setVisibility(View.GONE);
-			rlDiancai.setVisibility(View.VISIBLE);
-			listView.setVisibility(View.VISIBLE);
-		}
+//		orderBeanList=mContext.getSelectedOrderBean();
+		adapter.replaceAll(mContext.getSelectedOrderBean());
+		isExistBook();
 		for (int i = 0; i < orderBeanList.size(); i++) {
 			OrderBean orderBean=orderBeanList.get(i);
 			foodNumber += orderBean.onumber;
@@ -112,7 +101,18 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 		tvTotalFoodNumber.setText("" + foodNumber);
 		tvTotalPrice.setText("$" + totalPrice);
 	}
+	private void isExistBook(){
+		if (orderBeanList.size() == 0) {
+			tvNoOrderTips.setVisibility(View.VISIBLE);
+			rlDiancai.setVisibility(View.GONE);
+			listView.setVisibility(View.GONE);
+		} else {
+			tvNoOrderTips.setVisibility(View.GONE);
+			rlDiancai.setVisibility(View.VISIBLE);
+			listView.setVisibility(View.VISIBLE);
+		}
 
+	}
 	@Override
 	public void loadDataSuccess() {
 		showToast("loadDataSuccess");
@@ -144,44 +144,46 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 			// TODO Auto-generated method stub
 			Button add = helper.getView(R.id.btnAdd);
 			Button delete = helper.getView(R.id.btnDelete);
-
-//			add.setOnClickListener(new OnClickListener() {
-//				@Override
-//				public void onClick(View arg0) {
-//					OrderBean bean = orderManager.getOrders().get(position);
-//					bean.setNumber(bean.getNumber() + 1);
-//					adapter.notifyDataSetChanged();
-//					foodNumber++;
-//					totalPrice += bean.getFoodBean().getSalePrice();
-//					tvTotalFoodNumber.setText("" + foodNumber);
-//					tvTotalPrice.setText("$" + totalPrice);
-//				}
-//			});
-//			delete.setOnClickListener(new OnClickListener() {
-//
-//				@Override
-//				public void onClick(View arg0) {
-//					// TODO Auto-generated method stub
-//					OrderBean bean = orderManager.getOrders().get(position);
-//					if (bean.getNumber() == 1) {
-//						orderManager.getOrders().remove(position);
-//						int index = FoodManager.getDefault().getAllfoods().indexOf(bean.getFoodBean());
-//						LogUtil.d(TAG, "index:" + index);
-//						FoodManager.getDefault().getAllfoods().get(index).setOrdered(false);
-//
-//						EventBus.getDefault().post(new EventBean(EventBean.EventType.REMOVE_ORDER, null));
-//					} else {
-//						bean.setNumber(bean.getNumber() - 1);
-//					}
-//					totalPrice -= bean.getFoodBean().getSalePrice();
-//					tvTotalFoodNumber.setText("" + foodNumber);
-//					tvTotalPrice.setText("$" + totalPrice);
-//					adapter.notifyDataSetChanged();
-//				}
-//			});
+			add.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					addNumber(position);
+				}
+			});
+			delete.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					subNumber(position);
+				}
+			});
 		}
 	}
+	private void subNumber(int position){
+		OrderBean bean = mContext.getSelectedOrderBean().get(position);
+		if (bean.onumber == 1) {
+			mContext.getSelectedOrderBean().remove(position);
+			orderBeanList.remove(position);
+			isExistBook();
+		} else {
+			bean.onumber--;
+		}
+		foodNumber--;
+		totalPrice -= bean.oprice*bean.onumber;
+		tvTotalFoodNumber.setText("" + foodNumber);
+		tvTotalPrice.setText("$" + totalPrice);
+		adapter.notifyDataSetChanged();
+	}
+	private void addNumber(int position) {
+		OrderBean bean =mContext.getSelectedOrderBean().get(position);
+		bean.onumber++;
 
+		foodNumber++;
+		totalPrice += bean.oprice*bean.onumber;
+		tvTotalFoodNumber.setText("" + foodNumber);
+		tvTotalPrice.setText("$" + totalPrice);
+
+		adapter.notifyDataSetChanged();
+	}
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
@@ -225,7 +227,6 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 
 	@Override
 	public void currentSelected() {
-		// TODO Auto-generated method stub
 		LogUtil.d(TAG, "currentSelected");
 		initData();
 		adapter.notifyDataSetChanged();

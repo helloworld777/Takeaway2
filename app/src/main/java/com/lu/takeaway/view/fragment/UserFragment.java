@@ -10,11 +10,13 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lu.takeaway.R;
 import com.lu.takeaway.bean.UserBean;
 import com.lu.takeaway.view.activity.LoginActivity;
+import com.lu.takeaway.view.activity.OrderActivity;
 import com.lu.takeaway.view.app.DingDanApplication;
 
 import util.Constants;
@@ -27,6 +29,7 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
 	private boolean isLogin=false;
 	private UserBean userBean;
 	private Button btnOrder;
+	private RelativeLayout rlOrder,rlBook,rlAbout;
 	public UserFragment(){
 //		EventBus.getDefault().register(this);
 	}
@@ -35,19 +38,33 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
 		// TODO Auto-generated method stub
 		isLogin= SaveDataUtil.getBoolean(getActivity(), Constants.IS_LOGIN);
 		View view=inflater.inflate(R.layout.fragment_user, container,false);
+		initWidget(view);
+		return view;
+	}
+
+	private void initWidget(View view) {
 		llLogin=(LinearLayout) view.findViewById(R.id.llLogin);
 		tvLogin=(TextView) view.findViewById(R.id.tvLogin);
 		tvLogin.setOnClickListener(this);
 //		btnOrder=(Button) view.findViewById(R.id.btnOrder);
 //		btnOrder.setOnClickListener(this);
-		
-		userBean= DingDanApplication.getDefault().getCurrenUserBean();
-		if(userBean!=null){
+		rlOrder=findViewById(view,R.id.rlOrder);
+		rlOrder.setOnClickListener(this);
+		rlBook=findViewById(view,R.id.rlBook);
+		rlBook.setOnClickListener(this);
+		rlAbout=findViewById(view,R.id.rlAbout);
+		rlAbout.setOnClickListener(this);
+
+
+		isLogin=mContext.isLogin();
+		if(isLogin){
+			userBean= DingDanApplication.getDefault().getCurrenUserBean();
 			tvLogin.setText(userBean.getUsername());
 			isLogin=true;
 		}
-		return view;
+
 	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -56,12 +73,19 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
 				getActivity().startActivityForResult(new Intent(getActivity(),LoginActivity.class), REQUESTCODE_MAIN_LOGIN);
 			}
 			break;
+			case R.id.rlAbout:
+				break;
+			case R.id.rlBook:
+				break;
+			case R.id.rlOrder:
+							if(!isLogin){
+				getActivity().startActivityForResult(new Intent(getActivity(),LoginActivity.class), REQUESTCODE_MAIN_LOGIN);
+			}else{
+				startActivity(new Intent(getActivity(),OrderActivity.class));
+			}
+				break;
 //		case R.id.btnOrder:
-//			if(!isLogin){
-//				getActivity().startActivityForResult(new Intent(getActivity(),LoginActivity.class), REQUESTCODE_MAIN_LOGIN);
-//			}else{
-//				startActivity(new Intent(getActivity(),OrderActivity.class));
-//			}
+
 //
 //			break;
 		default:

@@ -39,15 +39,12 @@ public class DingDanApplication extends Application {
 	public UserBean getCurrenUserBean() {
 		return currenUserBean;
 	}
+	public  boolean isLogin(){
+		return  currenUserBean!=null;
+	}
 	public void setCurrenUserBean(UserBean currenUserBean) {
 		this.currenUserBean = currenUserBean;
 	}
-//	public OrderBean getOrderBean() {
-//		return orderBean;
-//	}
-//	public void setOrderBean(OrderBean orderBean) {
-//		this.orderBean = orderBean;
-//	}
 	public BitmapUtils getBitmapUtils() {
 		return bitmapUtils;
 	}
