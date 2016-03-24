@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/editview_height"
             android:layout_marginTop="15dip"
-            android:background="@mipmap/login_input"
+            android:background="@drawable/login_input"
             android:hint="@string/input_username"
             android:inputType="text"
             android:paddingLeft="5dp" >
@@ -32,9 +32,10 @@
             android:layout_height="@dimen/editview_height"
             android:layout_below="@+id/et_username"
             android:layout_marginTop="10dp"
-            android:background="@mipmap/login_input"
+            android:background="@drawable/login_input"
             android:hint="@string/input_password"
             android:inputType="textPassword"
+            android:maxLength="11"
             android:paddingLeft="5dp" >
         </EditText>
 
@@ -45,6 +46,7 @@
             android:layout_below="@id/et_password"
             android:checked="true"
             android:text="@string/remeber_password"
+            android:visibility="gone"
             android:textAppearance="@android:style/TextAppearance.Small"
             android:textColor="#716b60" />
 

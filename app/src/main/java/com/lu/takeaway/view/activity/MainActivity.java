@@ -1,5 +1,6 @@
 package com.lu.takeaway.view.activity;
 
+import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,7 +18,7 @@ import com.lu.takeaway.R;
 import com.lu.takeaway.bean.UserBean;
 import com.lu.takeaway.persenter.OrderPersenter;
 import com.lu.takeaway.persenter.UserPersenter;
-import com.lu.takeaway.view.IUserView;
+import com.lu.takeaway.view.IUserLoginView;
 import com.lu.takeaway.view.adapter.ViewPagerAdapter;
 import com.lu.takeaway.view.app.DingDanApplication;
 import com.lu.takeaway.view.fragment.BaseFragment;
@@ -32,10 +33,9 @@ import bean.EventBean;
 import de.greenrobot.event.EventBus;
 import util.Constants;
 import util.DialogUtil;
-import util.SaveDataUtil;
 
 @ContentView(value = R.layout.activity_main_new)
-public class MainActivity extends BaseFragmentActivity implements Constants,IUserView {
+public class MainActivity extends BaseFragmentActivity implements Constants,IUserLoginView {
 	@ViewInject(android.R.id.tabhost)
 	private FragmentTabHost mTabHost;
 	private MainFragment mainFragment;
@@ -96,9 +96,11 @@ public class MainActivity extends BaseFragmentActivity implements Constants,IUse
 	protected void bindData() {
 		EventBus.getDefault().register(this);
 		userPersenter=new UserPersenter(this);
+
+		AnimatorSet animationSet=new AnimatorSet();
 		ivBack.setVisibility(View.GONE);
-//		userBean=(UserBean) getIntent().getSerializableExtra("userbean");
-		
+		userBean=DingDanApplication.getDefault().getCurrenUserBean();
+		new OrderPersenter().queryOrderMaxId(userBean.lusername);
 		mTextArray = new String[]{ getString(R.string.title_activity_main), getString(R.string.title_activity_book), getString(R.string.user) };
 		mainFragment = new MainFragment();
 		userFragment = new UserFragment();
@@ -109,14 +111,12 @@ public class MainActivity extends BaseFragmentActivity implements Constants,IUse
 		viewpager.setAdapter(adapter);
 		menuViewHolders = Arrays.asList(new MenuViewHolder[] { new MenuViewHolder(ivHome, tvHome), new MenuViewHolder(ivOrder, tvOrder), new MenuViewHolder(ivUser, tvUser) });
 		viewpager.addOnPageChangeListener(new OnPageChangeListener() {
-			
 			@Override
 			public void onPageSelected(int arg0) {
 				position=arg0;
 				setMenuSeleted();
 				fragments[arg0].currentSelected();
 			}
-			
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
 			}
@@ -125,7 +125,7 @@ public class MainActivity extends BaseFragmentActivity implements Constants,IUse
 			public void onPageScrollStateChanged(int arg0) {
 			}
 		});
-		userPersenter.login("lyw","123456");
+//		userPersenter.login("lyw","123456");
 	}
 	
 
@@ -209,17 +209,17 @@ public class MainActivity extends BaseFragmentActivity implements Constants,IUse
 	public void loginSuccess(UserBean user) {
 		userBean=user;
 		DingDanApplication.getDefault().setCurrenUserBean(userBean);
-		new OrderPersenter().queryOrderMaxId(userBean.getUsername());
+
 	}
 
 	@Override
 	public void loginFaild() {
 
 		DialogUtil.showToast(getApplicationContext(),"loadDataFaild");
-		userBean=new UserBean();
-		userBean.setUsername(SaveDataUtil.getString(this, USERNAME));
-		userBean.setPassword("123456");
-		DingDanApplication.getDefault().setCurrenUserBean(userBean);
+//		userBean=new UserBean();
+//		userBean.setUsername(SaveDataUtil.getString(this, USERNAME));
+//		userBean.setPassword("123456");
+//		DingDanApplication.getDefault().setCurrenUserBean(userBean);
 	}
 
 	class MenuViewHolder {

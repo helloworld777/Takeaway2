@@ -1,6 +1,7 @@
 package com.lu.takeaway.view.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.lu.takeaway.persenter.FoodPersenter;
 import com.lu.takeaway.view.IFoodView;
 import com.lu.takeaway.view.adapter.LuAdapter;
 import com.lu.takeaway.view.adapter.ViewHolder;
+import com.lu.takeaway.view.widget.DialogLoading;
 import com.lu.takeaway.view.widget.xlistview.XListView;
 
 import java.text.DateFormat;
@@ -73,7 +75,13 @@ public class MainFragment extends BaseFragment implements IFoodView {
 
 		return view;
 	}
-	
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		dialogLoading=new DialogLoading(activity);
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -99,10 +107,12 @@ public class MainFragment extends BaseFragment implements IFoodView {
 		}
 	}
 	public void initData() {
-//		foodManager.queyrFood(0, new RequestCallBackUtil(getActivity(), this));
-//		luAdapter.notifyDataSetChanged();
 		isRefresh=false;
-		foodPersenter.queryAllFood(null);
+		if(allfoods.isEmpty()){
+			showLoadingDialog();
+			foodPersenter.queryAllFood(null);
+		}
+
 	}
 	 
 	@OnClick({ R.id.llShowMenu })
@@ -124,6 +134,7 @@ public class MainFragment extends BaseFragment implements IFoodView {
 	public void loadDataSucess(List<FoodBean> foodBeanList) {
 
 		showToast("loadDataSucess");
+		closeLoadingDialog();
 		if(foodBeanList==null&&foodBeanList.isEmpty()){
 			return;
 		}
@@ -138,14 +149,14 @@ public class MainFragment extends BaseFragment implements IFoodView {
 	@Override
 	public void loadDataFaild() {
 		showToast("loadDataFaild");
+		closeLoadingDialog();
 	}
 
 	class MyXListViewListener implements XListView.IXListViewListener {
 		@Override
 		public void onRefresh() {
-//			foodManager.refreshData(true);
 			refresh=true;
-//			foodManager.queyrFood(allfoods.size(),new RequestCallBackUtil(getActivity(), MainFragment.this));
+			showLoadingDialog();
 			mHandler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
@@ -164,6 +175,7 @@ public class MainFragment extends BaseFragment implements IFoodView {
 		@Override
 		public void onLoadMore() {
 			refresh=false;
+
 			mHandler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
@@ -184,7 +196,6 @@ public class MainFragment extends BaseFragment implements IFoodView {
 			super(context, datas, R.layout.item_food_listview);
 
 		}
-
 		@Override
 		public void convert(ViewHolder helper, final FoodBean item) {
 			helper.setString(R.id.itemName, item.name);
@@ -208,8 +219,6 @@ public class MainFragment extends BaseFragment implements IFoodView {
 					break;
 				}
 			}
-
-//			btnDianCai.setText(getString(item.isOrdered() ? R.string.ordered : R.string.dingcai));
 			btnDianCai.setText(isBooked ? R.string.ordered : R.string.dingcai);
 			btnDianCai.setOnClickListener(new OnClickListener() {
 
@@ -224,7 +233,7 @@ public class MainFragment extends BaseFragment implements IFoodView {
 						orderBean.onumber=1;
 						orderBean.odate=DateUtil.formateDate();
 						orderBean.ofoodname=item.name;
-						orderBean.ousername=mContext.getCurrenUserBean().getUsername();
+						orderBean.ousername=mContext.getCurrenUserBean().lusername;
 						orderBean.opicture=item.pictureUrl;
 						orderBean.ofinished=getString(R.string.orderUnFinish);
 						mContext.getSelectedOrderBean().add(orderBean);

@@ -12,15 +12,12 @@ import util.Constants;
  */
 public class BaseModel implements Constants {
     protected HttpUtils httpUtils;
-    int TIME_OUT=3000;
+    int TIME_OUT=5000;
     protected RequestParams params;
     public BaseModel(){
-        httpUtils=new HttpUtils();
-        httpUtils.configTimeout(TIME_OUT);
+        httpUtils=new HttpUtils(TIME_OUT);
     }
     protected void postRequest(String url,RequestParams params ,RequestCallBack<String> callBack){
-
-
         httpUtils.send(HttpRequest.HttpMethod.POST,
                 url,
                 params,

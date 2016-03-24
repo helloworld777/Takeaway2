@@ -3,16 +3,24 @@ package util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.lu.takeaway.bean.UserBean;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
  
-public class SPUtils  
+public class SPUtils  implements Constants
 {  
     /** 
      */
     public static final String FILE_NAME = "takeaway";
- 
+    public static void saveUserInfo(Context mActivity,UserBean user){
+        SPUtils.put(mActivity,USERNAME,user.lusername);
+        SPUtils.put(mActivity,PASSWORD,user.lpwd);
+        SPUtils.put(mActivity,ADDRESS,user.address);
+        SPUtils.put(mActivity,PHONE_NUMBER,user.phone);
+        SPUtils.put(mActivity,REGISTER_DATE,user.date);
+    }
     /** 
      *
      * @param context 
@@ -78,7 +86,31 @@ public class SPUtils
         }  
  
         return null;  
-    }  
+    }
+//    public static <T>T get(Context context, String key, T defaultObject)
+//    {
+//        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+//                Context.MODE_PRIVATE);
+//
+//        if (defaultObject instanceof String)
+//        {
+//            return sp.getString(key, (String) defaultObject);
+//        } else if (defaultObject instanceof Integer)
+//        {
+//            return sp.getInt(key, (Integer) defaultObject);
+//        } else if (defaultObject instanceof Boolean)
+//        {
+//            return sp.getBoolean(key, (Boolean) defaultObject);
+//        } else if (defaultObject instanceof Float)
+//        {
+//            return sp.getFloat(key, (Float) defaultObject);
+//        } else if (defaultObject instanceof Long)
+//        {
+//            return sp.getLong(key, (Long) defaultObject);
+//        }
+//
+//        return null;
+//    }
     /** 
      * @param context
      * @param key 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
@@ -8,20 +8,54 @@
     android:paddingRight="20dp" >
 
     <TextView
+        android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/contact_number" />
+    <com.lu.takeaway.view.widget.TimerTextView
+        android:layout_alignParentRight="true"
+        android:id="@+id/tvSendSmsCode"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/size10dp"
+        android:layout_below="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_height="@dimen/editview_height"
+        android:text="@string/sendYan"
+        android:background="@drawable/btn_bottombar"
+        >
 
+    </com.lu.takeaway.view.widget.TimerTextView>
     <EditText
         android:id="@+id/etPhone"
+        android:layout_below="@+id/tv1"
+
+        android:layout_toLeftOf="@+id/tvSendSmsCode"
         android:layout_width="match_parent"
         android:layout_height="@dimen/editview_height"
         android:layout_marginTop="10dp"
-        android:background="@mipmap/login_input"
+        android:background="@drawable/login_input"
         android:ems="10"
+        android:maxEms="11"
+        android:maxLength="11"
         android:hint="@string/input_contact_number"
         android:inputType="phone"
         android:paddingLeft="5dp" >
     </EditText>
+    <EditText
+        android:id="@+id/etSMSCode"
+        android:layout_below="@+id/etPhone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/editview_height"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_input"
+        android:ems="10"
+        android:maxEms="11"
+        android:maxLength="11"
+        android:hint="@string/input_contact_number"
+        android:inputType="phone"
+        android:visibility="gone"
+        android:paddingLeft="5dp" >
+    </EditText>
 
-</LinearLayout>
+</RelativeLayout>

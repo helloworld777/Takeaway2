@@ -13,8 +13,10 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            debuggable false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     useLibrary 'org.apache.http.legacy'
@@ -23,6 +25,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
+    compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
     compile files('libs/alipaySDK-20150818.jar')
@@ -31,4 +34,5 @@ dependencies {
     compile files('libs/xUtils-2.6.14.jar')
     compile files('libs/bmob_v3.2.0.jar')
     compile files('libs/Bmob_Push_V0.8beta_20160315.jar')
+    compile files('libs/BmobSMS_V1.0.1_20150710.jar')
 }

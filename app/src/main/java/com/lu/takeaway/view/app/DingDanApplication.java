@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.push.BmobPush;
+import cn.bmob.sms.BmobSMS;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobInstallation;
 import util.Constants;
@@ -22,6 +23,7 @@ public class DingDanApplication extends Application {
 	private BitmapUtils bitmapUtils;
 	private List<OrderBean> selectedOrderBean;
 	private int maxOrderId;
+	private int maxUserId;
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -30,6 +32,7 @@ public class DingDanApplication extends Application {
 		setSelectedOrderBean(new ArrayList<OrderBean>());
 
 		Bmob.initialize(this, Constants.Bmob_APPID);
+		BmobSMS.initialize(this,Constants.Bmob_APPID);
 		// 使用推送服务时的初始化操作
 		BmobInstallation.getCurrentInstallation(this).save();
 		// 启动推送服务
@@ -69,5 +72,13 @@ public class DingDanApplication extends Application {
 
 	public void setMaxOrderId(int maxOrderId) {
 		this.maxOrderId = maxOrderId;
+	}
+
+	public int getMaxUserId() {
+		return maxUserId;
+	}
+
+	public void setMaxUserId(int maxUserId) {
+		this.maxUserId = maxUserId;
 	}
 }

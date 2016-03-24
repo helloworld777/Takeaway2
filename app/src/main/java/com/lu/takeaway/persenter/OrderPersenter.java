@@ -143,9 +143,6 @@ public class OrderPersenter {
         }
         isRemove=false;
         for(int i=0,size=orderBeanList.size();i<orderBeanList.size();i=(isRemove?i:i+1) ){
-//            if(isRemove){
-//                i--;
-//            }
             if(orderBeanList.get(i).ofinished.equals("已派送")){
                 tempOrder.add(orderBeanList.remove(i));
                 isRemove=true;
@@ -154,12 +151,6 @@ public class OrderPersenter {
             }
         }
         tempOrder.addAll(orderBeanList);
-//        for(int i=0,size=orderBeanList.size();i<size;i++ ){
-//
-//            if(orderBeanList.get(i).ofinished.equals("已完成")){
-//                tempOrder.add(orderBeanList.remove(i));
-//            }
-//        }
 
         return tempOrder;
     }

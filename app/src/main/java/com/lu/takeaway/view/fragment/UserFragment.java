@@ -59,7 +59,7 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
 		isLogin=mContext.isLogin();
 		if(isLogin){
 			userBean= DingDanApplication.getDefault().getCurrenUserBean();
-			tvLogin.setText(userBean.getUsername());
+			tvLogin.setText(userBean.lusername);
 			isLogin=true;
 		}
 
@@ -89,7 +89,7 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
 		}
 	}
 	public void update(UserBean userBean){
-		tvLogin.setText(userBean.getUsername());
+		tvLogin.setText(userBean.lusername);
 	}
 	@Override
 	public void onDestroy() {

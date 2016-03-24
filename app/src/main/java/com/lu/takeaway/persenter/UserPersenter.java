@@ -1,17 +1,27 @@
 package com.lu.takeaway.persenter;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lu.takeaway.bean.UserBean;
 import com.lu.takeaway.model.UserModel;
-import com.lu.takeaway.view.IUserView;
+import com.lu.takeaway.view.IUserLoginView;
+import com.lu.takeaway.view.IUserRegisterView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.bmob.sms.BmobSMS;
+import cn.bmob.sms.exception.BmobException;
+import cn.bmob.sms.listener.VerifySMSCodeListener;
 import util.Debug;
 import util.JSONHelpUtil;
 
@@ -21,21 +31,30 @@ import util.JSONHelpUtil;
 public class UserPersenter extends  BasePersenter{
 
     UserModel userModel;
-    IUserView userView;
-    public UserPersenter(IUserView userView){
+    IUserLoginView userView;
+    private IUserRegisterView iUserRegisterView;
+    public UserPersenter(){
+        userModel=new UserModel();
+    }
+    public UserPersenter(IUserLoginView userView){
         userModel=new UserModel();
         this.userView=userView;
     }
     public void login(String username,String pwd) {
-
-        userModel.isExsit(username,pwd,new RequestCallBack<String>(){
+        userModel.isExsit(username,(pwd),new RequestCallBack<String>(){
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
 
                 String data=responseInfo.result;
                 Debug.d(UserPersenter.this,"onSuccess...............data:"+data);
-                userView.loginSuccess(resolveUserBean(data));
+                List<UserBean> userBeanList=resolveUserBean(data);
+                if(userBeanList.isEmpty()){
+                    userView.loginFaild();
+                }else{
+                    userView.loginSuccess(userBeanList.get(0));
+                }
+
             }
             @Override
             public void onFailure(HttpException e, String s) {
@@ -45,24 +64,59 @@ public class UserPersenter extends  BasePersenter{
             }
         });
     }
-    public UserBean resolveUserBean(String json){
-        UserBean userBean=null;
+    public List<UserBean> resolveUserBean(String json){
+        List<UserBean> userBeanList=new ArrayList<>();
         try {
             JSONHelpUtil jsonHelpUtil=new JSONHelpUtil(new JSONObject(json));
             JSONArray array=jsonHelpUtil.getJSONArray("results");
             if(array.length()>0){
-//                userBean=new UserBean();
                 for(int i=0,size=array.length();i<size;i++){
                     JSONObject object=array.getJSONObject(i);
-                    userBean=new Gson().fromJson(object.toString(), UserBean.class);
+                    UserBean userBean=new Gson().fromJson(object.toString(), UserBean.class);
+                    userBeanList.add(userBean);
                 }
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+        return userBeanList;
+    }
 
-        return userBean;
+    public void registerUser(Context context, String smscode,final UserBean userBean){
+        BmobSMS.verifySmsCode(context,userBean.phone, smscode, new VerifySMSCodeListener() {
+            @Override
+            public void done(BmobException ex) {
+                if(ex==null){//短信验证码已验证成功
+                    Log.i("bmob", "验证通过");
+                userModel.registerUser(userBean, new RegisterUsrCallBack());
+                }else{
+                    Log.i("bmob", "验证失败：code ="+ex.getErrorCode()+",msg = "+ex.getLocalizedMessage());
+                    if(iUserRegisterView !=null){
+                        iUserRegisterView.smsError();
+                    }
+                }
+            }
+        });
+    }
+    class RegisterUsrCallBack extends RequestCallBack<String> {
+        @Override
+        public void onSuccess(ResponseInfo<String> responseInfo) {
+            if(iUserRegisterView !=null){
+                iUserRegisterView.registerSuccess();
+            }
+        }
+        @Override
+        public void onFailure(HttpException e, String s) {
+            e.printStackTrace();
+            if(iUserRegisterView !=null){
+                iUserRegisterView.registerFaild();
+            }
+        }
+    }
+
+
+    public void setiUserRegisterView(IUserRegisterView iUserRegisterView) {
+        this.iUserRegisterView = iUserRegisterView;
     }
 }
