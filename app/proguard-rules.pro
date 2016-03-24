@@ -31,6 +31,10 @@
 }
 -keepclassmembers class * extends android.app.Activity {##不混淆Activity中参数类型为View的所有方法
    public void *(android.view.View);
+  }
+-keepclassmembers class * extends android.support.v4.app.FragmentActivity {##不混淆Activity中参数类型为View的所有方法
+   public void *(android.view.View);
+
 }
 -keepclassmembers class * extends android.support.v4.app.Fragment {##不混淆Activity中参数类型为View的所有方法
    public void *(android.view.View);
@@ -54,9 +58,8 @@
 -keepattributes Signature
 -keepattributes EnclosingMethod
 -keep public class * extends com.lidroid.xutils.**
-
 -keep class com.lu.takeaway.bean.**{*;}##不混淆所有的com.czy.bean包下的类和这些类的所有成员变量
-
+-keep class com.lidroid.xutils.**{*;}
 
     ##不混淆Serializable接口的子类中指定的某些成员变量和方法
     -keepclassmembers class * implements java.io.Serializable {
@@ -131,4 +134,12 @@
 -keep interface com.squareup.okhttp.** { *; }
 -dontwarn okio.**
 
+-keepclassmembers class {
+
+    public void onEvent*(**);
+
+}
+-keepclassmembers class * extends de.greenrobot.event.util.ThrowableFailureEvent {
+    <init>(java.lang.Throwable);
+}
 ##----------------------------------bmob class end- -------------------------
