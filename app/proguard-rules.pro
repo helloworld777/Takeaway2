@@ -67,23 +67,23 @@
         java.lang.Object writeReplace();
         java.lang.Object readResolve();
     }
--libraryjars libs/alipaySDK-20150818.jar
--libraryjars libs/gson-2.2.4.jar
--libraryjars libs/xUtils-2.6.14.jar
--libraryjars com.nineoldandroids:library:2.4.0
--libraryjars com.android.support:appcompat-v7:23.2.1
--libraryjars com.android.support:design:23.2.1
+#-libraryjars libs/alipaySDK-20150818.jar
+##-libraryjars libs/gson-2.2.4.jar
+#-libraryjars libs/xUtils-2.6.14.jar
+#-libraryjars com.nineoldandroids:library:2.4.0
+#-libraryjars com.android.support:appcompat-v7:23.2.1
+#-libraryjars com.android.support:design:23.2.1
 
 ################支付宝##################
--libraryjars libs/alipaysecsdk.jar
--libraryjars libs/alipayutdid.jar
--libraryjars libs/alipaysdk.jar
+#-libraryjars libs/alipaysecsdk.jar
+#-libraryjars libs/alipayutdid.jar
+#-libraryjars libs/alipaysdk.jar
 -keep class com.alipay.android.app.IAliPay{*;}
 -keep class com.alipay.android.app.IAlixPay{*;}
 -keep class com.alipay.android.app.IRemoteServiceCallback{*;}
 -keep class com.alipay.android.app.lib.ResourceMap{*;}
 ################gson##################
--libraryjars libs/gson-2.2.4.jar
+##-libraryjars libs/gson-2.2.4.jar
 -keep class com.google.gson.** {*;}
 #-keep class com.google.**{*;}
 -keep class sun.misc.Unsafe { *; }
@@ -105,9 +105,9 @@
 ##----------------------------------bmob class start- -------------------------
 # 这里根据具体的SDK版本修改
 
--libraryjars libs/bmob_v3.2.0.jar
--libraryjars libs/Bmob_Push_V0.8beta_20160315.jar
--libraryjars libs/BmobSMS_V1.0.1_20150710.jar
+#-libraryjars libs/bmob_v3.2.0.jar
+#-libraryjars libs/Bmob_Push_V0.8beta_20160315.jar
+#-libraryjars libs/BmobSMS_V1.0.1_20150710.jar
 
 
 -keepattributes Signature
