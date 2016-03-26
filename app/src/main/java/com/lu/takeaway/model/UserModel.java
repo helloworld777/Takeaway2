@@ -1,11 +1,14 @@
 package com.lu.takeaway.model;
 
+import android.content.Context;
+
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lu.takeaway.bean.UserBean;
 
+import cn.bmob.v3.listener.UpdateListener;
 import util.Constants;
 
 /**
@@ -30,6 +33,11 @@ public class UserModel extends BaseModel implements IUserModel  , Constants {
         params.addBodyParameter("phone",userBean.phone);
         params.addBodyParameter("date", userBean.date);
         postRequest(SERVER_BASE_URL+INSERT_USER_URL,params,callBack);
+    }
+    public void updateUser(UserBean userBean, Context context, UpdateListener updateListener){
+//        UserBean userServer=new UserBean();
+
+        userBean.update(context,userBean.getObjectId(),updateListener);
     }
 //    public void queryAllUser(){
 //        String myurl = SERVER_BASE_URL+QUERY_USER_URL;

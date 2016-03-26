@@ -7,10 +7,12 @@ import com.google.gson.Gson;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lu.takeaway.bean.User;
 import com.lu.takeaway.bean.UserBean;
 import com.lu.takeaway.model.UserModel;
 import com.lu.takeaway.view.IUserLoginView;
 import com.lu.takeaway.view.IUserRegisterView;
+import com.lu.takeaway.view.IView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,6 +24,8 @@ import java.util.List;
 import cn.bmob.sms.BmobSMS;
 import cn.bmob.sms.exception.BmobException;
 import cn.bmob.sms.listener.VerifySMSCodeListener;
+import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 import util.Debug;
 import util.JSONHelpUtil;
 
@@ -32,6 +36,7 @@ public class UserPersenter extends  BasePersenter{
 
     UserModel userModel;
     IUserLoginView userView;
+    private IView iView;
     private IUserRegisterView iUserRegisterView;
     public UserPersenter(){
         userModel=new UserModel();
@@ -39,6 +44,43 @@ public class UserPersenter extends  BasePersenter{
     public UserPersenter(IUserLoginView userView){
         userModel=new UserModel();
         this.userView=userView;
+    }
+    public void updateUser(UserBean userBean,Context context){
+        userModel.updateUser(userBean, context, new UpdateListener() {
+            @Override
+            public void onSuccess() {
+                if(iView!=null){
+                    iView.loadDataSuccess();
+                }
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                if(iView!=null){
+                    iView.loadDataFaild();
+                    d("i:"+i+",s:"+s);
+                }
+            }
+        });
+    }
+    public static void save(Context context){
+        final User user = new User();
+        user.setUsername("123123");
+        user.setPassword("123123");
+
+        user.save(context, new SaveListener() {
+
+            @Override
+            public void onSuccess() {
+                System.out.println("onSuccess");
+            }
+
+            @Override
+            public void onFailure(int arg0, String arg1) {
+                System.out.println("onFailure");
+                System.out.println("arg1:"+arg1);
+            }
+        });
     }
     public void login(String username,String pwd) {
         userModel.isExsit(username,(pwd),new RequestCallBack<String>(){
@@ -99,6 +141,15 @@ public class UserPersenter extends  BasePersenter{
             }
         });
     }
+
+    public IView getiView() {
+        return iView;
+    }
+
+    public void setiView(IView iView) {
+        this.iView = iView;
+    }
+
     class RegisterUsrCallBack extends RequestCallBack<String> {
         @Override
         public void onSuccess(ResponseInfo<String> responseInfo) {

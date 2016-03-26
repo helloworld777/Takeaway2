@@ -29,14 +29,14 @@
    void set*(***);
    *** get*();
 }
--keepclassmembers class * extends android.app.Activity {##不混淆Activity中参数类型为View的所有方法
+-keepclassmembers public class * extends android.app.Activity {##不混淆Activity中参数类型为View的所有方法
    public void *(android.view.View);
   }
--keepclassmembers class * extends android.support.v4.app.FragmentActivity {##不混淆Activity中参数类型为View的所有方法
+-keepclassmembers public class * extends android.support.v4.app.FragmentActivity {##不混淆Activity中参数类型为View的所有方法
    public void *(android.view.View);
-
+   public void onEvent*(**);
 }
--keepclassmembers class * extends android.support.v4.app.Fragment {##不混淆Activity中参数类型为View的所有方法
+-keepclassmembers public class * extends android.support.v4.app.Fragment {##不混淆Activity中参数类型为View的所有方法
    public void *(android.view.View);
 }
 
@@ -134,7 +134,7 @@
 -keep interface com.squareup.okhttp.** { *; }
 -dontwarn okio.**
 
--keepclassmembers class {
+-keepclassmembers class **{
 
     public void onEvent*(**);
 

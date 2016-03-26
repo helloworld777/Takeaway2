@@ -22,4 +22,5 @@ public interface Constants {
     String QUERY_ORDER_URL = SERVER_BASE_URL + "queryOrder?";
     String INSERT_ORDER_URL = SERVER_BASE_URL + "insertOrder?";
     String Bmob_APPID = "52ac871497b3f15d8cf509a0b4a74a17";
+    String INSET_FILE_URL=SERVER_BASE_URL+"insertFile";
 }

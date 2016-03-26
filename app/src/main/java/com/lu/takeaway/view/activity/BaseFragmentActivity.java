@@ -76,6 +76,6 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 		return emptyView ;
 	}
 	protected void d(String msg){
-		Debug.d(this,msg);
+		Debug.d(this,"......................"+msg);
 	}
 }

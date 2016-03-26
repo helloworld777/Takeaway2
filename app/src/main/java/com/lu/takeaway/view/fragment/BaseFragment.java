@@ -29,7 +29,9 @@ public class BaseFragment extends Fragment {
         mContext = DingDanApplication.getDefault();
         Debug.d(this, "BaseFragment()........................");
     }
-
+    public void d(String msg){
+        Debug.d(this, "........................"+msg);
+    }
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
