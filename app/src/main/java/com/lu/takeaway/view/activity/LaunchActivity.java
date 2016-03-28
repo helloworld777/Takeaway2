@@ -9,13 +9,11 @@ import android.widget.RelativeLayout;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lu.takeaway.R;
-import com.lu.takeaway.bean.User;
 import com.lu.takeaway.bean.UserBean;
 import com.lu.takeaway.persenter.UserPersenter;
 import com.lu.takeaway.view.IUserLoginView;
 import com.lu.takeaway.view.app.DingDanApplication;
 
-import cn.bmob.v3.listener.SaveListener;
 import util.Constants;
 import util.SPUtils;
 
@@ -49,21 +47,21 @@ public class LaunchActivity extends BaseFragmentActivity implements IUserLoginVi
 				}else{
 					userPersenter.login(username,password);
 
-					User user=new User();
-					user.setUsername("lyw");
-					user.setPassword("123456");
-
-					user.login(mActivity, new SaveListener() {
-						@Override
-						public void onSuccess() {
-							d("onSuccess");
-						}
-
-						@Override
-						public void onFailure(int i, String s) {
-							d("onFailure i:"+i+",s:"+s);
-						}
-					});
+//					User user=new User();
+//					user.setUsername("lyw");
+//					user.setPassword("123456");
+//
+//					user.login(mActivity, new SaveListener() {
+//						@Override
+//						public void onSuccess() {
+//							d("onSuccess");
+//						}
+//
+//						@Override
+//						public void onFailure(int i, String s) {
+//							d("onFailure i:"+i+",s:"+s);
+//						}
+//					});
 				}
 			}
 		});
@@ -73,7 +71,7 @@ public class LaunchActivity extends BaseFragmentActivity implements IUserLoginVi
 
 	@Override
 	public void loginSuccess(UserBean user) {
-		d("loginSuccess");
+		d("loginSuccess user.header_img:"+user.header_img);
 		DingDanApplication.getDefault().setCurrenUserBean(user);
 		SPUtils.saveUserInfo(mActivity,user);
 		startActivityTransition(MainActivity.class);

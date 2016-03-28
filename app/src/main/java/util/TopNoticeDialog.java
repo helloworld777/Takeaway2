@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lu.takeaway.R;
+import com.lu.takeaway.view.app.DingDanApplication;
 
 /**
  * @author laichunling
@@ -102,7 +103,12 @@ public class TopNoticeDialog {
      * @param type
      */
     private static void createToast(Context context, CharSequence text, TipType type){
-        wm= (WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+//        if(context==null){
+//            Debug.d(TopNoticeDialog.class,"context is null");
+////            throw new IllegalArgumentException("context must not be null");
+//            return ;
+//        }
+        wm= (WindowManager) DingDanApplication.getDefault().getSystemService(Context.WINDOW_SERVICE);
 
         final WindowManager.LayoutParams params = mParams;
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;

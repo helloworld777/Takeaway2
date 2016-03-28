@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lidroid.xutils.view.annotation.ContentView;
@@ -44,7 +45,12 @@ public class UserRegisterActivity extends BaseFragmentActivity implements Consta
 	private String pwd;
 	private UserPersenter userPersenter;
 	private UserBean userBean;
-	@OnClick({ R.id.btnCancel, R.id.btnNext })
+
+
+	@ViewInject(R.id.rlBack)
+	private RelativeLayout rlBack;
+
+	@OnClick({ R.id.btnCancel, R.id.btnNext,R.id.rlBack })
 	public void viewClick(View view) {
 		switch (view.getId()) {
 		case R.id.btnCancel:
@@ -78,7 +84,10 @@ public class UserRegisterActivity extends BaseFragmentActivity implements Consta
 
 			}
 			break;
+			case R.id.rlBack:
+				break;
 		}
+
 	}
 
 	private boolean isDataValide(String username,String pwd){

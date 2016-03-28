@@ -22,8 +22,9 @@ public class BaseFragment extends Fragment {
 
     public void initData() {
     }
+    protected void initWidget(View view){
 
-    ;
+    }
 
     public BaseFragment() {
         mContext = DingDanApplication.getDefault();

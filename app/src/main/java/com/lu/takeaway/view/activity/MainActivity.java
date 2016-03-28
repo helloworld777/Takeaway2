@@ -1,6 +1,5 @@
 package com.lu.takeaway.view.activity;
 
-import android.animation.AnimatorSet;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -30,6 +29,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import bean.EventBean;
+import cn.bmob.push.BmobPush;
+import cn.bmob.sms.BmobSMS;
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobInstallation;
 import de.greenrobot.event.EventBus;
 import util.Constants;
 import util.DialogUtil;
@@ -96,12 +99,31 @@ public class MainActivity extends BaseFragmentActivity implements Constants, IUs
     @Override
     protected void bindData() {
         EventBus.getDefault().register(this);
+        initVariable();
+        new OrderPersenter().queryOrderMaxId(userBean.lusername);
+        viewpager.setAdapter(adapter);
+        viewpager.addOnPageChangeListener(new MyOnPageChangeListener());
+        setMenuSeleted();
+        initBmob();
+    }
+    private class MyOnPageChangeListener implements OnPageChangeListener{
+        @Override
+        public void onPageSelected(int arg0) {
+            position = arg0;
+            setMenuSeleted();
+            fragments[arg0].currentSelected();
+        }
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+        }
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+        }
+    }
+    private void initVariable() {
         userPersenter = new UserPersenter(this);
-
-        AnimatorSet animationSet = new AnimatorSet();
         ivBack.setVisibility(View.GONE);
         userBean = DingDanApplication.getDefault().getCurrenUserBean();
-        new OrderPersenter().queryOrderMaxId(userBean.lusername);
         mTextArray = new String[]{getString(R.string.title_activity_main), getString(R.string.title_activity_book), getString(R.string.user)};
         mainFragment = new MainFragment();
         userFragment = new UserFragment();
@@ -109,26 +131,16 @@ public class MainActivity extends BaseFragmentActivity implements Constants, IUs
 
         fragments = new BaseFragment[]{mainFragment, orderFragment, userFragment};
         adapter = new ViewPagerAdapter(getSupportFragmentManager(), fragments);
-        viewpager.setAdapter(adapter);
         menuViewHolders = Arrays.asList(new MenuViewHolder[]{new MenuViewHolder(ivHome, tvHome), new MenuViewHolder(ivOrder, tvOrder), new MenuViewHolder(ivUser, tvUser)});
-        viewpager.addOnPageChangeListener(new OnPageChangeListener() {
-            @Override
-            public void onPageSelected(int arg0) {
-                position = arg0;
-                setMenuSeleted();
-                fragments[arg0].currentSelected();
-            }
+    }
 
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int arg0) {
-            }
-        });
-//		userPersenter.login("lyw","123456");
-        UserPersenter.save(this);
+    private void initBmob() {
+        Bmob.initialize(this, Constants.Bmob_APPID);
+        BmobSMS.initialize(this,Constants.Bmob_APPID);
+        // 使用推送服务时的初始化操作
+        BmobInstallation.getCurrentInstallation(this).save();
+        // 启动推送服务
+        BmobPush.startWork(this);
     }
 
 
@@ -181,9 +193,7 @@ public class MainActivity extends BaseFragmentActivity implements Constants, IUs
             }
         }
         tvTitle.setText(mTextArray[position]);
-
         ivSearch.setVisibility(position == 0 ? View.VISIBLE : View.INVISIBLE);
-//		etKey.setVisibility(position==0?View.VISIBLE:View.INVISIBLE);
     }
 
     private void replaceFragment() {
@@ -192,7 +202,6 @@ public class MainActivity extends BaseFragmentActivity implements Constants, IUs
     }
 
     public void onEventMainThread(EventBean bean) {
-
     }
 
     @Override

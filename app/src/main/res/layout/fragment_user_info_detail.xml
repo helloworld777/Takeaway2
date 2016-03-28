@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey"
+    android:orientation="vertical">
+    <!--头像-->
+
+    <RelativeLayout
+        android:id="@+id/head_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size20dp"
+        android:background="@drawable/selector_user_info_bg"
+        android:padding="@dimen/size15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_person_info_photos"
+            android:textColor="@color/c333"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/size14sp" />
+
+        <com.lu.takeaway.view.widget.CircleImageView
+            android:id="@+id/ciMyHeaderImg"
+            android:layout_width="@dimen/size40dp"
+            android:layout_height="@dimen/size40dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/header" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rlMyName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size1dp"
+        android:background="@drawable/selector_user_info_bg"
+
+        android:padding="@dimen/size15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_person_info_nickname"
+            android:textColor="@color/c333"
+            android:textSize="@dimen/size14sp" />
+
+        <TextView
+            android:id="@+id/tvMyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:text="my_person_info_nickname_str"
+            android:textColor="@color/c333"
+            android:textSize="@dimen/size14sp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rlMyPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/size1dp"
+        android:background="@drawable/selector_user_info_bg"
+        android:padding="@dimen/size15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/my_person_info_phone"
+            android:textColor="@color/c333"
+            android:textSize="@dimen/size14sp" />
+
+        <TextView
+            android:id="@+id/tvMyPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:text="1111111111"
+            android:textColor="@color/c333"
+            android:textSize="@dimen/size14sp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rlMyAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/size1dp"
+        android:background="@drawable/selector_user_info_bg"
+        android:padding="@dimen/size15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/my_person_info_address"
+            android:textColor="@color/c333"
+            android:textSize="@dimen/size14sp" />
+
+        <TextView
+            android:id="@+id/tvMyAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:paddingRight="@dimen/size10dp"
+            android:text="string/my_person_info_default_sex_str"
+            android:textColor="@color/c333"
+            android:textSize="@dimen/size14sp" />
+
+    </RelativeLayout>
+
+    <!--地区-->
+
+    <RelativeLayout
+        android:id="@+id/rlMyDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/size1dp"
+        android:background="@drawable/selector_user_info_bg"
+        android:padding="@dimen/size15dp">
+
+        <TextView
+            android:id="@+id/address_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/my_person_info_date"
+            android:textColor="@color/c333"
+            android:textSize="@dimen/size14sp" />
+
+        <TextView
+            android:id="@+id/tvMyDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size16dp"
+            android:layout_toRightOf="@+id/address_tv"
+            android:background="@null"
+            android:gravity="right|center"
+            android:maxLines="2"
+            android:paddingRight="@dimen/size10dp"
+            android:text="2016-3-26"
+            android:textColor="@color/c333"
+            android:textSize="@dimen/size14sp" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlExit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/size10dp"
+        android:background="@drawable/selector_user_info_bg"
+        android:padding="@dimen/size15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/exit"
+            android:textColor="@color/c333"
+            android:textSize="@dimen/size14sp" />
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>

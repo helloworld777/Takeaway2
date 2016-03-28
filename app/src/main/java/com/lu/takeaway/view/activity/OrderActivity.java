@@ -39,11 +39,11 @@ public class OrderActivity extends BaseFragmentActivity implements IOrderView{
 	@ViewInject(R.id.tvTitle)
 	private TextView tvTitle;
 	
-	@OnClick({R.id.ivBack})
+	@OnClick({R.id.rlBack})
 	@Override
 	protected void viewClick(View view) {
 		switch (view.getId()) {
-		case R.id.ivBack:
+		case R.id.rlBack:
 			finish();
 			break;
 		default:

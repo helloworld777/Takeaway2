@@ -100,8 +100,7 @@ public class PhotoUtils {
 	}
 
 	/**
-	 * �˾�ͼƬ
-	 * 
+	 *
 	 * @param context
 	 * @param activity
 	 * @param path

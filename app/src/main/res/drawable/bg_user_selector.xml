@@ -3,5 +3,5 @@
 
   
    <item android:drawable="@color/lighter_gray" android:state_pressed="false"></item>
-  <item android:drawable="@color/darker_gray" android:state_pressed="true"></item>
+  <item android:drawable="@color/menuBg" android:state_pressed="true"></item>
 </selector>

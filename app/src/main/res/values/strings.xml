@@ -89,4 +89,12 @@
     
     <string name="load_data_faild">获取数据失败,请检查网络是否可用</string>
     <string name="dialog_loading">正在努力加载中</string>
+
+    <string name="my_person_info_photos">我的头像</string>
+    <string name="my_person_info_nickname">我的昵称</string>
+    <string name="my_person_info_phone">我的号码</string>
+    <string name="my_person_info_address">我的地址</string>
+    <string name="my_person_info_date">我的日期</string>
+    <string name="my_person_info">我的信息</string>
+    <string name="exit">注销登录</string>
 </resources>

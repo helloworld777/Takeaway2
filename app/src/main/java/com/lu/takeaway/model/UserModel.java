@@ -22,7 +22,7 @@ public class UserModel extends BaseModel implements IUserModel  , Constants {
     }
     @Override
     public void isExsit(String username, String pwd,RequestCallBack<String> callBack) {
-        String myurl = SERVER_BASE_URL+QUERY_USER_URL + "username" + username+ "&password=" + pwd;
+        String myurl = SERVER_BASE_URL+QUERY_USER_URL + "username=" + username+ "&password=" + pwd;
         httpUtils.send(HttpRequest.HttpMethod.GET, myurl, callBack);
     }
     public void registerUser(UserBean userBean,RequestCallBack<String> callBack){

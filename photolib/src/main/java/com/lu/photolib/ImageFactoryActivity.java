@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.ryg.dynamicload.DLBasePluginActivity;
 
 
 /**
@@ -18,7 +20,7 @@ import android.widget.ViewFlipper;
  *
  */
 //@ContentView(R.layout.activity_imagefactory)
-public class ImageFactoryActivity extends Activity implements OnClickListener{
+public class ImageFactoryActivity extends DLBasePluginActivity implements OnClickListener{
 //	private HeaderLayout mHeaderLayout;
 	private ViewFlipper mVfFlipper;
 //	private Button mBtnLeft;
@@ -49,9 +51,8 @@ public class ImageFactoryActivity extends Activity implements OnClickListener{
 
 	private Button btn_back,btn_next;
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		ViewUtils.inject(this);
 		setContentView(R.layout.activity_imagefactory);
 		initViews();
 		initWidget();
@@ -167,6 +168,7 @@ public class ImageFactoryActivity extends Activity implements OnClickListener{
 			mVfFlipper.showPrevious();
 		}
 		initImageFactory();
+		Log.d("ImageFactoryActivity","init.......mPath:"+mPath+"，mType："+mType);
 	}
 
 	private void initImageFactory() {

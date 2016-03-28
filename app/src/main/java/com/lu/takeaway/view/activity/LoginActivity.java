@@ -34,9 +34,14 @@ public class LoginActivity extends BaseFragmentActivity implements Constants,IUs
 	private String username, password;
 
 	private boolean isData = false;
+	private boolean isJump=false;
 	private UserPersenter userPersenter;
 	@Override
 	protected void bindData() {
+//		Intent intent=getIntent();
+//		if(intent!=null){
+			isJump=(getIntent()!=null);
+//		}
 		et_username.setText("lyw");
 		et_password.setText("123456");
 		userPersenter=new UserPersenter(this);
@@ -72,8 +77,10 @@ public class LoginActivity extends BaseFragmentActivity implements Constants,IUs
 		switch (arg1) {
 		case REQUESTCODE_MAIN_LOGIN:
 			isData=true;
+			isJump=true;
 			break;
 		case REQUESTCODE_REGISTER_LOGIN:
+
 //			if (data != null) {
 //				userBean = (UserBean) data.getSerializableExtra("userbean");
 //				et_username.setText(userBean.username);
@@ -95,9 +102,12 @@ public class LoginActivity extends BaseFragmentActivity implements Constants,IUs
 
 	@Override
 	public void loginSuccess(UserBean user) {
+
 		SPUtils.saveUserInfo(mActivity,user);
 		DingDanApplication.getDefault().setCurrenUserBean(user);
-		startActivityForResultTransition(MainActivity.class);
+		if(!isJump){
+			startActivityForResultTransition(MainActivity.class);
+		}
 		finish();
 	}
 

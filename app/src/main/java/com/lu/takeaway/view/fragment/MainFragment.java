@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.BitmapUtils;
@@ -25,6 +26,9 @@ import com.lu.takeaway.view.adapter.LuAdapter;
 import com.lu.takeaway.view.adapter.ViewHolder;
 import com.lu.takeaway.view.widget.DialogLoading;
 import com.lu.takeaway.view.widget.xlistview.XListView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -57,8 +61,7 @@ public class MainFragment extends BaseFragment implements IFoodView {
 	public MainFragment() {
 		EventBus.getDefault().register(this);
 		foodPersenter=new FoodPersenter(this);
-
-		initData();
+//		initData();
 		LogUtil.d(this,"MainFragment()..........");
 	}
 
@@ -86,7 +89,7 @@ public class MainFragment extends BaseFragment implements IFoodView {
 	public void onResume() {
 		super.onResume();
 		LogUtil.d(TAG, "onResume");
-		luAdapter.notifyDataSetChanged();
+		initData();
 	}
 
 	@Override
@@ -191,9 +194,13 @@ public class MainFragment extends BaseFragment implements IFoodView {
 	}
 
 	class FoodAdapter extends LuAdapter<FoodBean> {
-
+		DisplayImageOptions options;
 		public FoodAdapter(Context context, List<FoodBean> datas, int mItemLayoutId) {
 			super(context, datas, R.layout.item_food_listview);
+			options = new DisplayImageOptions.Builder()
+					.displayer(new RoundedBitmapDisplayer(20))
+					.build();
+
 
 		}
 		@Override
@@ -209,8 +216,9 @@ public class MainFragment extends BaseFragment implements IFoodView {
 
 			if(!TextUtils.isEmpty(item.pictureUrl)&&item.pictureUrl.length()>10){
 				LogUtil.d(TAG, "item.getPicture():"+item.pictureUrl);
-				bitmapUtils.configDefaultLoadFailedImage(R.mipmap.menu_icon_home);
-				bitmapUtils.display(helper.getView(R.id.itemPicture), item.pictureUrl);
+//				bitmapUtils.configDefaultLoadFailedImage(R.mipmap.menu_icon_home);
+//				bitmapUtils.display(helper.getView(R.id.itemPicture), item.pictureUrl);
+				ImageLoader.getInstance().displayImage(item.pictureUrl,(ImageView) helper.getView(R.id.itemPicture),options);
 			}
 			boolean isBooked=false;
 			for(OrderBean orderBean:mContext.getSelectedOrderBean()){
@@ -249,6 +257,7 @@ public class MainFragment extends BaseFragment implements IFoodView {
 	@Override
 	public void currentSelected() {
 		LogUtil.d(TAG, "currentSelected");
+		initData();
 		luAdapter.notifyDataSetChanged();
 	}
 }
