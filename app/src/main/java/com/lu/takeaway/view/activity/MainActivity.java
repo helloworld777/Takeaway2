@@ -1,13 +1,19 @@
 package com.lu.takeaway.view.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lidroid.xutils.view.annotation.ContentView;
@@ -24,6 +30,11 @@ import com.lu.takeaway.view.fragment.BaseFragment;
 import com.lu.takeaway.view.fragment.BookFragment;
 import com.lu.takeaway.view.fragment.MainFragment;
 import com.lu.takeaway.view.fragment.UserFragment;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.SendMessageToWX;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tencent.mm.sdk.openapi.WXMediaMessage;
+import com.tencent.mm.sdk.openapi.WXTextObject;
 
 import java.util.Arrays;
 import java.util.List;
@@ -105,21 +116,27 @@ public class MainActivity extends BaseFragmentActivity implements Constants, IUs
         viewpager.addOnPageChangeListener(new MyOnPageChangeListener());
         setMenuSeleted();
         initBmob();
+
+//        sharedWeiXin();
     }
-    private class MyOnPageChangeListener implements OnPageChangeListener{
+
+    private class MyOnPageChangeListener implements OnPageChangeListener {
         @Override
         public void onPageSelected(int arg0) {
             position = arg0;
             setMenuSeleted();
             fragments[arg0].currentSelected();
         }
+
         @Override
         public void onPageScrolled(int arg0, float arg1, int arg2) {
         }
+
         @Override
         public void onPageScrollStateChanged(int arg0) {
         }
     }
+
     private void initVariable() {
         userPersenter = new UserPersenter(this);
         ivBack.setVisibility(View.GONE);
@@ -136,7 +153,7 @@ public class MainActivity extends BaseFragmentActivity implements Constants, IUs
 
     private void initBmob() {
         Bmob.initialize(this, Constants.Bmob_APPID);
-        BmobSMS.initialize(this,Constants.Bmob_APPID);
+        BmobSMS.initialize(this, Constants.Bmob_APPID);
         // 使用推送服务时的初始化操作
         BmobInstallation.getCurrentInstallation(this).save();
         // 启动推送服务
@@ -210,15 +227,78 @@ public class MainActivity extends BaseFragmentActivity implements Constants, IUs
         LogUtil.i(getClass(), "onActivityResult..............resultCode="
                 + resultCode);
 //        switch (requestCode) {
-            UserFragment userFragments= (UserFragment) fragments[position];
+        UserFragment userFragments = (UserFragment) fragments[position];
         userFragments.chooseHeaderImg(requestCode, resultCode,
-                    data, this);
+                data, this);
 //            break;
 //        }
 
     }
 
+    private IWXAPI api;
+    private String smg;
+    public void sharedWeiXin() {
 
+        // 通过WXAPIFactory工厂，获取IWXAPI的实例
+        api = WXAPIFactory.createWXAPI(this, "wxdbe2c330d4cfb36e", false);
+        final EditText editor = new EditText(this);
+        editor.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        editor.setText("这是takeaway应用分享的哦");
+        smg=editor.getText().toString();
+        showAlert(this, "title text",smg, new MyOnClickListener());
+    }
+
+
+    private class MyOnClickListener implements  DialogInterface.OnClickListener{
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            String text = smg;
+            if (text == null || text.length() == 0) {
+                return;
+            }
+
+            // 初始化一个WXTextObject对象
+            WXTextObject textObj = new WXTextObject();
+            textObj.text = text;
+
+            // 用WXTextObject对象初始化一个WXMediaMessage对象
+            WXMediaMessage msg = new WXMediaMessage();
+            msg.mediaObject = textObj;
+            // 发送文本类型的消息时，title字段不起作用
+            // msg.title = "Will be ignored";
+            msg.description = text;
+
+            // 构造一个Req
+            SendMessageToWX.Req req = new SendMessageToWX.Req();
+            req.transaction = buildTransaction("text"); // transaction字段用于唯一标识一个请求
+            req.message = msg;
+            req.scene = SendMessageToWX.Req.WXSceneTimeline;
+//                req.scene = isTimelineCb.isChecked() ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
+
+            // 调用api接口发送数据到微信
+            api.sendReq(req);
+        }
+    }
+    public static AlertDialog showAlert(final Context context, final String msg, final String title,DialogInterface.OnClickListener c) {
+        if (context instanceof Activity && ((Activity) context).isFinishing()) {
+            return null;
+        }
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(title);
+        builder.setMessage(msg);
+        builder.setPositiveButton("ok", c);
+        builder.setNegativeButton("cancel",new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                dialog.cancel();
+            }
+        });
+        final AlertDialog alert = builder.create();
+        alert.show();
+        return alert;
+    }
 
     @Override
     public void loginSuccess(UserBean user) {
@@ -253,5 +333,9 @@ public class MainActivity extends BaseFragmentActivity implements Constants, IUs
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    private String buildTransaction(final String type) {
+        return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
     }
 }

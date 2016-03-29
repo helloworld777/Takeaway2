@@ -30,6 +30,7 @@ import com.lu.takeaway.bean.UserBean;
 import com.lu.takeaway.persenter.UserPersenter;
 import com.lu.takeaway.view.IView;
 import com.lu.takeaway.view.activity.LoginActivity;
+import com.lu.takeaway.view.activity.MainActivity;
 import com.lu.takeaway.view.activity.OrderActivity;
 import com.lu.takeaway.view.activity.UserInfoDetailActivity;
 import com.lu.takeaway.view.app.DingDanApplication;
@@ -105,6 +106,7 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
                 }
                 break;
             case R.id.rlAbout:
+                ((MainActivity)getActivity()).sharedWeiXin();
                 break;
             case R.id.llUserInfo:
                 startActivityTransition(UserInfoDetailActivity.class);

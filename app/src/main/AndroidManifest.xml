@@ -71,7 +71,19 @@
 
         <!-- alipay sdk end -->
 
-
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="sdksample"/>
+            </intent-filter>
+        </activity>
         <!-- receiver bmob push message -->
         <receiver android:name=".view.receiver.MyPushMessageReceiver">
             <intent-filter >
