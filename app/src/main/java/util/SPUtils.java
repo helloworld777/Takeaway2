@@ -19,7 +19,18 @@ public class SPUtils  implements Constants
         SPUtils.put(mActivity,PASSWORD,user.lpwd);
         SPUtils.put(mActivity,ADDRESS,user.address);
         SPUtils.put(mActivity,PHONE_NUMBER,user.phone);
+        SPUtils.put(mActivity,HEADER_IMG,user.header_img);
         SPUtils.put(mActivity,REGISTER_DATE,user.date);
+    }
+    public static UserBean getUserInfo(Context mActivity){
+        UserBean userBean=new UserBean();
+        userBean.lusername=(String)SPUtils.get(mActivity,USERNAME,"");
+        userBean.password=(String)SPUtils.get(mActivity,PASSWORD,"");
+        userBean.address=(String)SPUtils.get(mActivity,ADDRESS,"");
+        userBean.phone=(String)SPUtils.get(mActivity,PHONE_NUMBER,"");
+        userBean.header_img=(String)SPUtils.get(mActivity,HEADER_IMG,"");
+        userBean.date=(String)SPUtils.get(mActivity,REGISTER_DATE,"");
+        return userBean;
     }
     /** 
      *

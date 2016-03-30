@@ -39,8 +39,8 @@ public class OrderPersenter {
     public OrderPersenter(IOrderView iOrderView){
         this.iOrderView=iOrderView;
     }
-    public void queryOrder(String username){
-        orderModel.queryOrder(username,new QueryOrderCallBack());
+    public void queryOrder(int uid){
+        orderModel.queryOrder(String.valueOf(uid),new QueryOrderCallBack());
     }
     public void queryOrderMaxId(String username){
         orderModel.queryOrder(username, new RequestCallBack<String>() {

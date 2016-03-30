@@ -23,6 +23,7 @@
             android:background="@drawable/login_input"
             android:hint="@string/input_username"
             android:inputType="text"
+            android:textColor="@color/c333"
             android:paddingLeft="5dp" >
         </EditText>
 
@@ -35,6 +36,7 @@
             android:background="@drawable/login_input"
             android:hint="@string/input_password"
             android:inputType="textPassword"
+            android:textColor="@color/c333"
             android:maxLength="11"
             android:paddingLeft="5dp" >
         </EditText>

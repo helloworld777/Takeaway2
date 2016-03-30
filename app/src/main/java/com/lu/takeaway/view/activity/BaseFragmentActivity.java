@@ -1,13 +1,16 @@
 package com.lu.takeaway.view.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,6 +19,7 @@ import com.lu.takeaway.R;
 import com.lu.takeaway.view.widget.DialogLoading;
 
 import util.Debug;
+import util.JActivityManager;
 import util.TopNoticeDialog;
 
 public abstract class BaseFragmentActivity extends FragmentActivity {
@@ -29,9 +33,17 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 		ViewUtils.inject(this);
 		mActivity=this;
 		dialogLoading=new DialogLoading(this);
+		JActivityManager.getInstance().pushActivity(this);
 		bindData();
 
 	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		JActivityManager.getInstance().popActivity(this);
+	}
+
 	protected void showLoadingDialog(){
 		if(!dialogLoading.isShowing()){
 			dialogLoading.show();;
@@ -69,11 +81,21 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 		if(null==emptyTips){
 			emptyTips=String.valueOf(getText(R.string.empty_data));
 		}
+		emptyView.setTextColor(Color.BLACK);
 		emptyView .setText(emptyTips);
 		emptyView .setVisibility(View.GONE);
 		((ViewGroup)listview.getParent()).addView(emptyView);
 		listview.setEmptyView(emptyView );
 		return emptyView ;
+	}
+	protected void openSoftInput(View view) {
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+	}
+
+	protected void closeSoftInput() {
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0); //强制隐藏键盘
 	}
 	protected void d(String msg){
 		Debug.d(this,"......................"+msg);

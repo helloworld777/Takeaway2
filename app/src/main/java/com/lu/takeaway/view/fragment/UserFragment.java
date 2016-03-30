@@ -73,6 +73,13 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        d("onResume");
+        initData();
+    }
+
     protected void initWidget(View view) {
         llLogin = (LinearLayout) view.findViewById(R.id.llLogin);
         tvLogin = (TextView) view.findViewById(R.id.tvLogin);
@@ -201,22 +208,6 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
 //            dlIntent.p
         intent.putExtra(ImageFactoryActivity.TYPE,
                 ImageFactoryActivity.CROP);
-//        ImageFactoryActivity imageFactoryActivity=new ImageFactoryActivity();
-//        String packageName="com.lu.photolib";
-//
-//        DLIntent dlIntent=new DLIntent(packageName,"com.lu.photolib.ImageFactoryActivity");
-//
-//        if (path != null) {
-//            dlIntent.putExtra("path", path);
-////            dlIntent.p
-//            dlIntent.putExtra(ImageFactoryActivity.TYPE,
-//                    ImageFactoryActivity.CROP);
-//            DLPluginManager pluginManager = DLPluginManager.getInstance(getActivity());
-//
-//            pluginManager.startPluginActivity(getActivity(), dlIntent);
-//
-//            pluginManager.startPluginActivityForResult(getActivity(),dlIntent,0);
-//        }
         context.startActivityForResult(intent, INTENT_REQUEST_CODE_CROP);
     }
 
@@ -311,6 +302,7 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
 
     @Override
     public void initData() {
+        d("onResume");
         isLogin = mContext.isLogin();
         if (isLogin) {
             userBean = DingDanApplication.getDefault().getCurrenUserBean();
@@ -319,8 +311,9 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
         }
         mContext.getBitmapUtils().display(iv_login, userBean.header_img);
         DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .displayer(new RoundedBitmapDisplayer(20))
+                .displayer(new RoundedBitmapDisplayer(20)).showImageOnFail(R.mipmap.default_header)
                 .build();
+//        options.getImageOnFail(getResources());
         ImageLoader.getInstance().displayImage(userBean.header_img,iv_login,options);
     }
 

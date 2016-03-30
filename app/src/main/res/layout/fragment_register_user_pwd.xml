@@ -21,9 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/editview_height"
             android:layout_marginTop="5dip"
-            android:background="@mipmap/login_input"
+            android:background="@drawable/login_input"
             android:hint="@string/input_username"
             android:inputType="text"
+            android:textColor="@color/c333"
             android:paddingLeft="5dp" >
         </EditText>
     </LinearLayout>
@@ -44,8 +45,9 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/editview_height"
             android:layout_marginTop="5dip"
-            android:background="@mipmap/login_input"
+            android:background="@drawable/login_input"
             android:ems="10"
+            android:textColor="@color/c333"
             android:hint="@string/input_password"
             android:inputType="textPassword"
             android:paddingLeft="5dp" >

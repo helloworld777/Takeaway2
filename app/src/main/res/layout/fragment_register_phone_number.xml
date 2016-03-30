@@ -22,6 +22,7 @@
         android:gravity="center"
         android:layout_height="@dimen/editview_height"
         android:text="@string/sendYan"
+        android:visibility="gone"
         android:background="@drawable/btn_bottombar"
         >
 
@@ -38,6 +39,7 @@
         android:ems="10"
         android:maxEms="11"
         android:maxLength="11"
+        android:textColor="@color/c333"
         android:hint="@string/input_contact_number"
         android:inputType="phone"
         android:paddingLeft="5dp" >
@@ -53,6 +55,7 @@
         android:maxEms="11"
         android:maxLength="11"
         android:hint="@string/input_contact_number"
+        android:textColor="@color/c333"
         android:inputType="phone"
         android:visibility="gone"
         android:paddingLeft="5dp" >

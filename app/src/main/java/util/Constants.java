@@ -7,6 +7,8 @@ public interface Constants {
     String PHONE_NUMBER = "phone_number";
     String ADDRESS = "address";
     String REGISTER_DATE = "register_date";
+    String HEADER_IMG="header_img";
+
     int REQUESTCODE_REGISTER_LOGIN = 0;
     int REQUESTCODE_MAIN_LOGIN = 1;
     String IS_LOGIN = "islogin";

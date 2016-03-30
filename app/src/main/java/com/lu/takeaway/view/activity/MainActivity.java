@@ -40,10 +40,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import bean.EventBean;
-import cn.bmob.push.BmobPush;
-import cn.bmob.sms.BmobSMS;
-import cn.bmob.v3.Bmob;
-import cn.bmob.v3.BmobInstallation;
 import de.greenrobot.event.EventBus;
 import util.Constants;
 import util.DialogUtil;
@@ -115,7 +111,7 @@ public class MainActivity extends BaseFragmentActivity implements Constants, IUs
         viewpager.setAdapter(adapter);
         viewpager.addOnPageChangeListener(new MyOnPageChangeListener());
         setMenuSeleted();
-        initBmob();
+//        initBmob();
 
 //        sharedWeiXin();
     }
@@ -151,14 +147,7 @@ public class MainActivity extends BaseFragmentActivity implements Constants, IUs
         menuViewHolders = Arrays.asList(new MenuViewHolder[]{new MenuViewHolder(ivHome, tvHome), new MenuViewHolder(ivOrder, tvOrder), new MenuViewHolder(ivUser, tvUser)});
     }
 
-    private void initBmob() {
-        Bmob.initialize(this, Constants.Bmob_APPID);
-        BmobSMS.initialize(this, Constants.Bmob_APPID);
-        // 使用推送服务时的初始化操作
-        BmobInstallation.getCurrentInstallation(this).save();
-        // 启动推送服务
-        BmobPush.startWork(this);
-    }
+
 
 
     @OnClick({R.id.rlHome, R.id.rlOrder, R.id.rlUser, R.id.ivSearch})

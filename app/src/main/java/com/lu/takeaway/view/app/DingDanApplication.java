@@ -18,6 +18,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.push.BmobPush;
+import cn.bmob.sms.BmobSMS;
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobInstallation;
+import util.Constants;
 import util.Debug;
 import util.FileUtils;
 
@@ -37,10 +42,21 @@ public class DingDanApplication extends Application {
 		setSelectedOrderBean(new ArrayList<OrderBean>());
 
 		initImageLoader();
-
+		initBmob();
 		Debug.d(this,"DingDanApplication.......................onCreate..............speed time:"+(System.currentTimeMillis()-start)/1000.0+" s");
+//		new UserPersenter().queryMaxUid(this,null);
 	}
-
+	private void initBmob() {
+		Bmob.initialize(this, Constants.Bmob_APPID);
+		BmobSMS.initialize(this, Constants.Bmob_APPID);
+		// 使用推送服务时的初始化操作
+		BmobInstallation.getCurrentInstallation(this).save();
+		// 启动推送服务
+		BmobPush.startWork(this);
+	}
+//	private void logout(){
+//		this.setCurrenUserBean(null);
+//	}
 	private void initImageLoader() {
 		File cacheDir = new File(FileUtils.imgPathPath());
 		ImageLoaderConfiguration config  = new ImageLoaderConfiguration

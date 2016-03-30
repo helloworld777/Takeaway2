@@ -30,19 +30,37 @@ public class UserInfoDetailActivity extends BaseFragmentActivity implements Cons
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
 
-
+    @ViewInject(R.id.tvSave)
+    private TextView tvSave;
 
     @ViewInject(R.id.rlBack)
     private RelativeLayout rlBack;
     private boolean isHome=true;
-    @OnClick(R.id.rlBack)
+
+    private String updateMsg;
+    @OnClick({R.id.rlBack,R.id.tvSave})
     public void viewClick(View view){
-        if(isHome){
-            finish();
-        }else{
-            replaceFragment(false,null,null);
+        switch (view.getId()) {
+            case R.id.rlBack:
+                if(isHome){
+                    finish();
+                }else{
+                    replaceFragment(false,null,null);
+                }
+                break;
+            case R.id.tvSave:
+                userInfoUpdateFragment.updateUserInfo();
+                break;
+
         }
     }
+//    private void updateUserInfo(){
+//        UserBean userBean=new UserBean();
+//
+//        if(updateMsg.equals(getString(R.string.my_person_info_nickname))){
+//            userBean.lusername=
+//        }
+//    }
     @Override
     protected void bindData() {
         ivSearch.setVisibility(View.GONE);
@@ -53,22 +71,25 @@ public class UserInfoDetailActivity extends BaseFragmentActivity implements Cons
 
         replaceFragment(false,null,null);
     }
+    public void backHome(){
+        replaceFragment(false,null,null);
+    }
     public void replaceFragment(boolean isUpdate,String msg,String updateMsg){
         d("isUpdate:"+isUpdate+",msg:"+msg+",updateMsg:"+updateMsg);
         transaction=fragmentManager.beginTransaction();
         if(isUpdate){
+            tvSave.setVisibility(View.VISIBLE);
             transaction.setCustomAnimations(R.anim.activity_back_in,R.anim.activity_back_out);
             isHome=false;
+
+            this.updateMsg=updateMsg;
             tvTitle.setText("更改"+updateMsg);
             userInfoUpdateFragment=new UserInfoUpdateFragment();
-//            Bundle bundle=new Bundle();
-//            bundle.putString("data",msg);
-//            bundle.putString("updateMsg",updateMsg);
-//            userInfoUpdateFragment.setArguments(bundle);
             userInfoUpdateFragment.setData(msg,updateMsg);
             transaction.addToBackStack(null);
             transaction.replace(R.id.mainFrame, userInfoUpdateFragment);
         }else{
+            tvSave.setVisibility(View.GONE);
             isHome=true;
             transaction.replace(R.id.mainFrame, userInfoDetailFragment);
             tvTitle.setText(getString(R.string.my_person_info));

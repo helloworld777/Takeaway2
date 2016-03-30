@@ -12,7 +12,7 @@ public class FoodBean extends BmobObject {
     public FoodBean() {
         this.setTableName("foods");
     }
-    public String name,pictureUrl,note;
+    public String name,pictureUrl,note,littlePicUrl;
     public double price,sale;
     public int number;
 //    public FoodBean(String name,double price,double sale,int number,String pictureUrl,String note){

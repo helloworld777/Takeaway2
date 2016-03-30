@@ -214,11 +214,11 @@ public class MainFragment extends BaseFragment implements IFoodView {
 
 			final Button btnDianCai = helper.getView(R.id.btnDianCai);
 
-			if(!TextUtils.isEmpty(item.pictureUrl)&&item.pictureUrl.length()>10){
-				LogUtil.d(TAG, "item.getPicture():"+item.pictureUrl);
+			if(!TextUtils.isEmpty(item.littlePicUrl)&&item.littlePicUrl.length()>10){
+				LogUtil.d(TAG, "item.getPicture():"+item.littlePicUrl);
 //				bitmapUtils.configDefaultLoadFailedImage(R.mipmap.menu_icon_home);
 //				bitmapUtils.display(helper.getView(R.id.itemPicture), item.pictureUrl);
-				ImageLoader.getInstance().displayImage(item.pictureUrl,(ImageView) helper.getView(R.id.itemPicture),options);
+				ImageLoader.getInstance().displayImage(item.littlePicUrl,(ImageView) helper.getView(R.id.itemPicture),options);
 			}
 			boolean isBooked=false;
 			for(OrderBean orderBean:mContext.getSelectedOrderBean()){

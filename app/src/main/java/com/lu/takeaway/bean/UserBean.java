@@ -18,8 +18,8 @@ public class UserBean extends BmobObject implements Serializable{
 	public String header_img;
 	
 	public String lusername,lpwd;
-	
-	private int id;
+//	public int uid;
+	public int id;
 	public UserBean(){
 		setTableName("LUser");
 	}

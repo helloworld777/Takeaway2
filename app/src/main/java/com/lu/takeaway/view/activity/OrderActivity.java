@@ -58,7 +58,7 @@ public class OrderActivity extends BaseFragmentActivity implements IOrderView{
 		orderAdapter=new OrderAdapter(getApplicationContext(), orderBeans, R.layout.item_order_listview);
 		listView.setAdapter(orderAdapter);
 		orderPersenter=new OrderPersenter(this);
-		orderPersenter.queryOrder(DingDanApplication.getDefault().getCurrenUserBean().lusername);
+		orderPersenter.queryOrder(DingDanApplication.getDefault().getCurrenUserBean().id);
 		setListViewEmptyView(listView,null);
 //		orderBeanManager=new OrderBeanManager();
 //		int uid= DingDanApplication.getDefault().getCurrenUserBean().getId();

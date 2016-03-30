@@ -14,6 +14,7 @@ import com.lu.takeaway.view.widget.TimerTextView;
 import cn.bmob.sms.BmobSMS;
 import cn.bmob.sms.exception.BmobException;
 import cn.bmob.sms.listener.RequestSMSCodeListener;
+import util.DataVaildUtil;
 
 public class RegisterPhoneNumberFragment extends BaseFragment implements View.OnClickListener{
 	private EditText etPhone,etSMSCode;
@@ -36,6 +37,12 @@ public class RegisterPhoneNumberFragment extends BaseFragment implements View.On
 	public void onClick(View view){
 		switch (view.getId()){
 			case R.id.tvSendSmsCode:
+				if(!DataVaildUtil.isDataVailed(getActivity(),etPhone.getText().toString(),getString(R.string.phone_empty))){
+					return;
+				}
+				if(!DataVaildUtil.checkMobileNumber(getActivity(),etPhone.getText().toString())){
+					return;
+				}
 				etSMSCode.setVisibility(View.VISIBLE);
 				tvSendSmsCode.startTimer();
 				sendSmsCode();
@@ -48,7 +55,6 @@ public class RegisterPhoneNumberFragment extends BaseFragment implements View.On
 		super.onDestroy();
 		tvSendSmsCode.closeTimer();
 	}
-
 	private void sendSmsCode() {
 		BmobSMS.requestSMSCode(getActivity(), etPhone.getText().toString(), "模板名称",new RequestSMSCodeListener() {
 			@Override

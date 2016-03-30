@@ -87,7 +87,7 @@ public class OrderFragment extends BaseFragment implements OnClickListener,IOrde
 	}
 
 	public void initData() {
-		orderPersenter.queryOrder("lyw");
+//		orderPersenter.queryOrder("lyw");
 		foodNumber = 0;
 		totalPrice = 0;
 

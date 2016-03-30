@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/size10dp" >
+        android:padding="@dimen/size10dp">
 
 
         <ImageView
@@ -22,47 +22,49 @@
             android:id="@+id/tvFoodName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/image"
             android:layout_marginTop="@dimen/size5dp"
+            android:layout_toRightOf="@+id/image"
             android:text="点的菜名"
-            android:textColor="#000000"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/tvFoodCount"
-            android:layout_toRightOf="@+id/image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvFoodName"
-            android:text="1" />
+            android:layout_toRightOf="@+id/image"
+            android:text="1"
+            android:textColor="@color/c333" />
+
         <TextView
             android:id="@+id/tvFoodTotalPrice"
-            android:layout_toRightOf="@+id/tvFoodCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvFoodName"
             android:layout_marginLeft="@dimen/size10dp"
-            android:text="1" />
+            android:layout_toRightOf="@+id/tvFoodCount"
+            android:text="1"
+            android:textColor="@color/c333" />
 
         <TextView
             android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:layout_toLeftOf="@+id/tvFinished"
             android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/tvFinished"
             android:gravity="right"
-             android:layout_marginRight="10dp"
-             android:textColor="#000000"
-            android:text="8-4 21:55" />
-        
+            android:text="8-4 21:55"
+            android:textColor="#000000" />
+
         <TextView
             android:id="@+id/tvFinished"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="已配送"
-             android:layout_alignParentRight="true"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            />
+            android:text="已配送" />
     </RelativeLayout>
 
 </LinearLayout>

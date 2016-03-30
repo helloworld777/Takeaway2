@@ -9,9 +9,9 @@ import com.lu.takeaway.bean.OrderBean;
  */
 public class OrderModel extends BaseModel{
 
-    public void queryOrder(String username,RequestCallBack<String>callBack){
+    public void queryOrder(String uid,RequestCallBack<String>callBack){
         params=new RequestParams();
-        params.addBodyParameter("username",username);
+        params.addBodyParameter("uid",uid);
         postRequest(QUERY_ORDER_URL,params,callBack);
     }
     public void commitOrder(String ousername,OrderBean order,RequestCallBack<String>callBack){
@@ -24,6 +24,7 @@ public class OrderModel extends BaseModel{
         params.addBodyParameter("oid",String.valueOf(order.oid));
         params.addBodyParameter("opicture",String.valueOf(order.opicture));
         params.addBodyParameter("ofinished",String.valueOf(order.ofinished));
+        params.addBodyParameter("uid",String.valueOf(order.uid));
         postRequest(INSERT_ORDER_URL,params,callBack);
     }
 }

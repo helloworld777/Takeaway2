@@ -12,8 +12,13 @@ import android.widget.TextView;
 
 import com.lu.takeaway.R;
 import com.lu.takeaway.bean.UserBean;
+import com.lu.takeaway.view.activity.LoginActivity;
 import com.lu.takeaway.view.activity.UserInfoDetailActivity;
+import com.lu.takeaway.view.app.DingDanApplication;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import util.JActivityManager;
 
 /**
  * Created by lenovo on 2016/3/26.
@@ -55,7 +60,11 @@ public class UserInfoDetailFragment extends BaseFragment implements View.OnClick
         tvMyDate.setText(userBean.date);
 
         ImageView ciMyHeaderImg=findViewById(view,R.id.ciMyHeaderImg);
-        ImageLoader.getInstance().displayImage(userBean.header_img,ciMyHeaderImg);
+
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnFail(R.mipmap.default_header)
+                .build();
+        ImageLoader.getInstance().displayImage(userBean.header_img,ciMyHeaderImg,options);
     }
     UserInfoDetailActivity userInfoDetailActivity;
     @Override
@@ -77,12 +86,20 @@ public class UserInfoDetailFragment extends BaseFragment implements View.OnClick
                 userInfoDetailActivity.replaceFragment(true,userBean.address,getString(R.string.my_person_info_address));
                 break;
             case  R.id.rlMyDate:
-                userInfoDetailActivity.replaceFragment(true,userBean.date,getString(R.string.my_person_info_date));
+//                userInfoDetailActivity.replaceFragment(true,userBean.date,getString(R.string.my_person_info_date));
                 break;
             case  R.id.rlExit:
-                showToast("exit");
+                exit();
+//                showToast("exit");
                 break;
 
         }
+    }
+    private void exit(){
+        DingDanApplication.getDefault().setCurrenUserBean(null);
+//        startActivityTransition(LoginActivity.class);
+//        getActivity().finish();
+        JActivityManager.getInstance().closeAllActivity();
+        startActivityTransition(LoginActivity.class);
     }
 }
