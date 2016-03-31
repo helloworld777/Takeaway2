@@ -161,8 +161,8 @@ public class UserPersenter extends BasePersenter {
         void getMaxUid(int maxUid);
     }
 
-    public void login(String username, String pwd) {
-        userModel.isExsit(username, (MD5Util.MD5(pwd)), new RequestCallBack<String>() {
+    public void login(String username, String pwd,boolean isMd5) {
+        userModel.isExsit(username, isMd5?(MD5Util.MD5(pwd)):pwd, new RequestCallBack<String>() {
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {

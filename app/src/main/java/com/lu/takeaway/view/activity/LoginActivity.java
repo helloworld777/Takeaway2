@@ -70,7 +70,7 @@ public class LoginActivity extends BaseFragmentActivity implements Constants, IU
         String[] datas=new String[]{username, password};
         String[] tips=new String[]{getString(R.string.username_empty), getString(R.string.pwd_empty)};
         if (DataVaildUtil.isDataVailed(this, datas, tips)){
-            userPersenter.login(username, password);
+            userPersenter.login(username, password,true);
          }
     }
 

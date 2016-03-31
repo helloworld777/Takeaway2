@@ -44,6 +44,7 @@ import java.io.File;
 
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.UploadFileListener;
+import cn.sharesdk.tencent.qzone.QZone;
 import util.Constants;
 import util.Debug;
 import util.FileUtils;
@@ -113,7 +114,8 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
                 }
                 break;
             case R.id.rlAbout:
-                ((MainActivity)getActivity()).sharedWeiXin();
+//                ((MainActivity)getActivity()).sharedWeiXin();
+                ((MainActivity)getActivity()).showShare(getActivity(), QZone.NAME,false);
                 break;
             case R.id.llUserInfo:
                 startActivityTransition(UserInfoDetailActivity.class);

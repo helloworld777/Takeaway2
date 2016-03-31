@@ -40,6 +40,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import bean.EventBean;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 import de.greenrobot.event.EventBus;
 import util.Constants;
 import util.DialogUtil;
@@ -114,6 +116,7 @@ public class MainActivity extends BaseFragmentActivity implements Constants, IUs
 //        initBmob();
 
 //        sharedWeiXin();
+        ShareSDK.initSDK(this);
     }
 
     private class MyOnPageChangeListener implements OnPageChangeListener {
@@ -236,7 +239,43 @@ public class MainActivity extends BaseFragmentActivity implements Constants, IUs
         smg=editor.getText().toString();
         showAlert(this, "title text",smg, new MyOnClickListener());
     }
+    /**
+     * 演示调用ShareSDK执行分享
+     *
+     * @param context
+     * @param platformToShare  指定直接分享平台名称（一旦设置了平台名称，则九宫格将不会显示）
+     * @param showContentEdit  是否显示编辑页
+     */
+    public static void showShare(Context context, String platformToShare, boolean showContentEdit) {
+        OnekeyShare oks = new OnekeyShare();
+        oks.setSilent(!showContentEdit);
+        if (platformToShare != null) {
+            oks.setPlatform(platformToShare);
+        }
+        //ShareSDK快捷分享提供两个界面第一个是九宫格 CLASSIC  第二个是SKYBLUE
+//        oks.setTheme(OnekeyShareTheme.CLASSIC);
+        // 令编辑页面显示为Dialog模式
+//        oks.setDialogMode();
+        // 在自动授权时可以禁用SSO方式
+//        oks.disableSSOWhenAuthorize();
+        //oks.setAddress("12345678901"); //分享短信的号码和邮件的地址
+        oks.setTitle("ShareSDK--Title");
+        oks.setTitleUrl("http://mob.com");
+        oks.setText("ShareSDK--文本");
+        oks.setImagePath("/sdcard/test.png");  //分享sdcard目录下的图片
+//        oks.setImageUrl(randomPic()[0]);
+//        oks.setUrl("http://www.mob.com"); //微信不绕过审核分享链接
+        //oks.setFilePath("/sdcard/test-pic.jpg");  //filePath是待分享应用程序的本地路劲，仅在微信（易信）好友和Dropbox中使用，否则可以不提供
+//        oks.setComment("分享"); //我对这条分享的评论，仅在人人网和QQ空间使用，否则可以不提供
+//        oks.setSite("ShareSDK");  //QZone分享完之后返回应用时提示框上显示的名称
+//        oks.setSiteUrl("http://mob.com");//QZone分享参数
+//        oks.setVenueName("ShareSDK");
+//        oks.setVenueDescription("This is a beautiful place!");
 
+
+        // 启动分享
+        oks.show(context);
+    }
 
     private class MyOnClickListener implements  DialogInterface.OnClickListener{
         @Override

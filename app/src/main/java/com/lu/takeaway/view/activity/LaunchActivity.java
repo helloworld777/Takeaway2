@@ -45,7 +45,7 @@ public class LaunchActivity extends BaseFragmentActivity implements IUserLoginVi
 					startActivityTransition(LoginActivity.class);
 					finish();
 				}else{
-					userPersenter.login(username,password);
+					userPersenter.login(username,password,false);
 
 //					User user=new User();
 //					user.setUsername("lyw");
