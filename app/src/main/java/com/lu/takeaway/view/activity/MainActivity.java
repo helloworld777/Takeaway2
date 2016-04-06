@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -30,11 +31,15 @@ import com.lu.takeaway.view.fragment.BaseFragment;
 import com.lu.takeaway.view.fragment.BookFragment;
 import com.lu.takeaway.view.fragment.MainFragment;
 import com.lu.takeaway.view.fragment.UserFragment;
+import com.tencent.connect.share.QzoneShare;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.SendMessageToWX;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.tencent.mm.sdk.openapi.WXMediaMessage;
 import com.tencent.mm.sdk.openapi.WXTextObject;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
 
 import java.util.Arrays;
 import java.util.List;
@@ -246,7 +251,11 @@ public class MainActivity extends BaseFragmentActivity implements Constants, IUs
      * @param platformToShare  指定直接分享平台名称（一旦设置了平台名称，则九宫格将不会显示）
      * @param showContentEdit  是否显示编辑页
      */
-    public static void showShare(Context context, String platformToShare, boolean showContentEdit) {
+    public void showShare(Context context, String platformToShare, boolean showContentEdit) {
+        shareToQzone ();
+       if(true){
+           return;
+       }
         OnekeyShare oks = new OnekeyShare();
         oks.setSilent(!showContentEdit);
         if (platformToShare != null) {
@@ -327,7 +336,35 @@ public class MainActivity extends BaseFragmentActivity implements Constants, IUs
         alert.show();
         return alert;
     }
+    public void shareToQzone (){
+        Tencent mTencent = Tencent.createInstance("100371282", this);
+        //分享类型
+        Bundle params = new Bundle();
+//        params.putString(QzoneShare.SHARE_TO_QQ_KEY_TYPE,SHARE_TO_QZONE_TYPE_IMAGE_TEXT );
+        params.putString(QzoneShare.SHARE_TO_QQ_TITLE, "标题");//必填
+        params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, "摘要");//选填
+        params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, "www.baidu.com");//必填
+//        params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, "ss");
+        mTencent.shareToQzone(this, params, listener);
+    }
+    IUiListener listener = new IUiListener() {
+        @Override
+        public void onComplete(Object o) {
+            d("onComplete");
+        }
 
+        @Override
+        public void onError(UiError uiError) {
+            d("onError:errorDetail---"+uiError.errorDetail);
+            d("onError:errorMessage---"+uiError.errorMessage);
+        }
+
+        @Override
+        public void onCancel() {
+            d("onCancel");
+        }
+
+    };
     @Override
     public void loginSuccess(UserBean user) {
         userBean = user;
