@@ -81,6 +81,11 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
         initData();
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
+
     protected void initWidget(View view) {
         llLogin = (LinearLayout) view.findViewById(R.id.llLogin);
         tvLogin = (TextView) view.findViewById(R.id.tvLogin);

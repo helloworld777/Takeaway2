@@ -88,7 +88,6 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 		super.onStart();
 		LogUtil.d(TAG, "onStart");
 	}
-
 	public void initData() {
 //		orderPersenter.queryOrder("lyw");
 		foodNumber = 0;
@@ -129,6 +128,16 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 		showToast("loadDataFaild");
 	}
 
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		d("onHiddenChanged hidden:"+hidden);
+	}
+
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+		super.setUserVisibleHint(isVisibleToUser);
+	}
 
 	class OrderAdapter extends LuAdapter<OrderBean> {
 		public OrderAdapter(Context context, List<OrderBean> datas, int mItemLayoutId) {
