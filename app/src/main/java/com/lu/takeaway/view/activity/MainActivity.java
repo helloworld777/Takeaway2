@@ -31,6 +31,7 @@ import com.lu.takeaway.view.fragment.BaseFragment;
 import com.lu.takeaway.view.fragment.BookFragment;
 import com.lu.takeaway.view.fragment.MainFragment;
 import com.lu.takeaway.view.fragment.UserFragment;
+import com.networkbench.agent.impl.NBSAppAgent;
 import com.tencent.connect.share.QzoneShare;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.SendMessageToWX;
@@ -120,8 +121,9 @@ public class MainActivity extends BaseFragmentActivity implements Constants, IUs
         setMenuSeleted();
 //        initBmob();
 
-//        sharedWeiXin();
+//        sharedWeiXin();a0398d1293df473da37001e1a1340fa3
         ShareSDK.initSDK(this);
+        NBSAppAgent.setLicenseKey("a0398d1293df473da37001e1a1340fa3").withLocationServiceEnabled(true).start(this.getApplicationContext());
     }
 
     private class MyOnPageChangeListener implements OnPageChangeListener {
