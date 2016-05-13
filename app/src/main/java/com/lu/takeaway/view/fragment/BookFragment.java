@@ -52,6 +52,7 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 		orderPersenter=new OrderPersenter();
 		orderPersenter.setiView(this);
 	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //		orderManager = OrderManager.getDefault();

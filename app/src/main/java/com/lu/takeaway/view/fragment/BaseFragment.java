@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.View;
@@ -27,6 +29,17 @@ public class BaseFragment extends Fragment {
     }
     protected void initWidget(View view){
 
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Debug.d(this, "onCreate()........................");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     public BaseFragment() {
