@@ -16,17 +16,15 @@ import android.widget.TextView;
 import com.lu.takeaway.R;
 import com.lu.takeaway.bean.OrderBean;
 import com.lu.takeaway.persenter.OrderPersenter;
+import com.lu.takeaway.util.DialogUtil;
+import com.lu.takeaway.util.LogUtil;
+import com.lu.takeaway.util.StringUtil;
 import com.lu.takeaway.view.IView;
 import com.lu.takeaway.view.adapter.LuAdapter;
 import com.lu.takeaway.view.adapter.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import util.Debug;
-import util.DialogUtil;
-import util.LogUtil;
-import util.StringUtil;
 
 @SuppressLint("NewApi")
 public class BookFragment extends BaseFragment implements OnClickListener,IView {
@@ -70,7 +68,7 @@ public class BookFragment extends BaseFragment implements OnClickListener,IView 
 		setListViewEmptyView(listView,null);
 		listView.setAdapter(adapter);
 
-		Debug.d(this,"onCreateView..............");
+		LogUtil.d(this, "onCreateView..............");
 
 		return view;
 	}

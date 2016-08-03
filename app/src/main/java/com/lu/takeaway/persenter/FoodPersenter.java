@@ -7,6 +7,7 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lu.takeaway.bean.FoodBean;
 import com.lu.takeaway.model.FoodModel;
+import com.lu.takeaway.util.JSONHelpUtil;
 import com.lu.takeaway.view.IFoodView;
 
 import org.json.JSONArray;
@@ -14,8 +15,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
-
-import util.JSONHelpUtil;
 
 /**
  * Created by lenovo on 2016/3/21.

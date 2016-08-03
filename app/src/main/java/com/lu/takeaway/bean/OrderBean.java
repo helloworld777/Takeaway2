@@ -1,7 +1,7 @@
 package com.lu.takeaway.bean;
 
 import cn.bmob.v3.BmobObject;
-import util.StringUtil;
+import com.lu.takeaway.util.StringUtil;
 
 /**
  * Created by lenovo on 2016/3/22.

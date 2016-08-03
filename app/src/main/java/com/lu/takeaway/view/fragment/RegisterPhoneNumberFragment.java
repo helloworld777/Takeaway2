@@ -14,7 +14,7 @@ import com.lu.takeaway.view.widget.TimerTextView;
 import cn.bmob.sms.BmobSMS;
 import cn.bmob.sms.exception.BmobException;
 import cn.bmob.sms.listener.RequestSMSCodeListener;
-import util.DataVaildUtil;
+import com.lu.takeaway.util.DataVaildUtil;
 
 public class RegisterPhoneNumberFragment extends BaseFragment implements View.OnClickListener{
 	private EditText etPhone,etSMSCode;

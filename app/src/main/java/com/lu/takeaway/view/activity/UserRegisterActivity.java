@@ -15,16 +15,15 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.lu.takeaway.R;
 import com.lu.takeaway.bean.UserBean;
 import com.lu.takeaway.persenter.UserPersenter;
+import com.lu.takeaway.util.Constants;
+import com.lu.takeaway.util.DataVaildUtil;
+import com.lu.takeaway.util.DateUtil;
+import com.lu.takeaway.util.LogUtil;
+import com.lu.takeaway.util.SPUtils;
 import com.lu.takeaway.view.IUserRegisterView;
 import com.lu.takeaway.view.app.DingDanApplication;
 import com.lu.takeaway.view.fragment.RegisterPhoneNumberFragment;
 import com.lu.takeaway.view.fragment.RegisterUserPwdFragment;
-
-import util.Constants;
-import util.DataVaildUtil;
-import util.DateUtil;
-import util.Debug;
-import util.MD5Util;
 
 @ContentView(R.layout.activity_register)
 public class UserRegisterActivity extends BaseFragmentActivity implements Constants, IUserRegisterView {
@@ -69,7 +68,7 @@ public class UserRegisterActivity extends BaseFragmentActivity implements Consta
                 if (fragment instanceof RegisterUserPwdFragment) {
                     username = ((RegisterUserPwdFragment) fragment).getUsername();
                     pwd = ((RegisterUserPwdFragment) fragment).getPwd();
-                    Debug.d(this, "pwd" + pwd);
+                    LogUtil.d(this, "pwd" + pwd);
                     if (isDataValide(username, pwd)) {
                         replaceFragment();
                         btnNext.setText(getString(R.string.finish));
@@ -82,7 +81,8 @@ public class UserRegisterActivity extends BaseFragmentActivity implements Consta
 
                     if (DataVaildUtil.isDataVailed(this, phoneNumber, getString(R.string.phone_empty)) && DataVaildUtil.checkMobileNumber(this, phoneNumber)) {
                         d("username:" + username + "pwd:" + pwd);
-                        userBean = new UserBean(username, MD5Util.MD5(pwd), phoneNumber, "火星", DateUtil.formateDate());
+
+                        userBean = new UserBean(username, (pwd), phoneNumber, "火星", DateUtil.formateDate());
                         userPersenter.registerUser(this, smscode, userBean);
                     }
 
@@ -160,9 +160,12 @@ public class UserRegisterActivity extends BaseFragmentActivity implements Consta
 
     @Override
     public void registerSuccess() {
+        SPUtils.put(this,USERNAME,userBean.lusername);
+        SPUtils.put(this,PASSWORD,userBean.lpwd);
         showToast(getString(R.string.register_success));
         DingDanApplication.getDefault().setCurrenUserBean(userBean);
         startActivityTransition(MainActivity.class);
+        finish();
     }
 
     @Override

@@ -15,8 +15,8 @@ import com.lu.takeaway.view.activity.UserInfoDetailActivity;
 import com.lu.takeaway.view.app.DingDanApplication;
 
 import cn.bmob.v3.listener.UpdateListener;
-import util.DataVaildUtil;
-import util.SPUtils;
+import com.lu.takeaway.util.DataVaildUtil;
+import com.lu.takeaway.util.SPUtils;
 
 /**
  * Created by lenovo on 2016/3/26.

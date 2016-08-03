@@ -9,7 +9,7 @@ import com.lidroid.xutils.http.client.HttpRequest;
 import com.lu.takeaway.bean.UserBean;
 
 import cn.bmob.v3.listener.UpdateListener;
-import util.Constants;
+import com.lu.takeaway.util.Constants;
 
 /**
  * Created by lenovo on 2016/3/21.

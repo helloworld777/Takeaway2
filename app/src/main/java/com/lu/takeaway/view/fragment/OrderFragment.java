@@ -16,17 +16,15 @@ import android.widget.TextView;
 import com.lu.takeaway.R;
 import com.lu.takeaway.bean.OrderBean;
 import com.lu.takeaway.persenter.OrderPersenter;
+import com.lu.takeaway.util.DialogUtil;
+import com.lu.takeaway.util.LogUtil;
+import com.lu.takeaway.util.SaveDataUtil;
 import com.lu.takeaway.view.IOrderView;
 import com.lu.takeaway.view.adapter.LuAdapter;
 import com.lu.takeaway.view.adapter.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import util.Debug;
-import util.DialogUtil;
-import util.LogUtil;
-import util.SaveDataUtil;
 
 @SuppressLint("NewApi")
 public class OrderFragment extends BaseFragment implements OnClickListener,IOrderView {
@@ -67,7 +65,7 @@ public class OrderFragment extends BaseFragment implements OnClickListener,IOrde
 		btnDingDan.setOnClickListener(this);
 		adapter = new OrderAdapter(getActivity(), orderBeanList, R.layout.item_menu_listview);
 		listView.setAdapter(adapter);
-		Debug.d(this,"onCreateView..............");
+		LogUtil.d(this, "onCreateView..............");
 
 
 		return view;

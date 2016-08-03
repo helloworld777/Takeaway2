@@ -14,7 +14,7 @@ import com.lu.takeaway.R;
 import com.lu.takeaway.view.fragment.UserInfoDetailFragment;
 import com.lu.takeaway.view.fragment.UserInfoUpdateFragment;
 
-import util.Constants;
+import com.lu.takeaway.util.Constants;
 
 /**
  * Created by lenovo on 2016/3/26.

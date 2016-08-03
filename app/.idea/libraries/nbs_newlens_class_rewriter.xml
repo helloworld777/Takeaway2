@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="nbs.newlens.class.rewriter">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/nbs.newlens.class.rewriter.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

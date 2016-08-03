@@ -8,8 +8,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.lu.takeaway.R;
-
-import util.Debug;
+import com.lu.takeaway.util.LogUtil;
 
 
 /**
@@ -29,37 +28,13 @@ public class DialogLoading extends AlertDialog {
 		this.setCanceledOnTouchOutside(false);
 	}
 
-	public DialogLoading(Context context, boolean isBackable) {
-		super(context);
-		message = context.getString(R.string.dialog_loading);
-		this.mContext = context;
-		this.setCancelable(isBackable);
-		this.setCanceledOnTouchOutside(false);
-	}
-
-	public DialogLoading(Context context, String message) {
-		super(context);
-		this.message = message;
-		this.mContext = context;
-		this.setCancelable(true);
-		this.setCanceledOnTouchOutside(false);
-	}
-
-	public DialogLoading(Context context, int theme, String message) {
-		super(context, theme);
-		this.message = message;
-		this.mContext = context;
-		this.setCancelable(true);
-		this.setCanceledOnTouchOutside(false);
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.dialog_loading);
 		progressWheel= (ProgressWheel) findViewById(R.id.progress_wheel);
-		//自动旋转
-        progressWheel.spin();
+
         //设置边缘Bar条颜色
         progressWheel.setBarColor(Color.RED);
 //        progressWheel.setBarColor(getContext().getResources().getColor(R.color.main_color));
@@ -69,6 +44,8 @@ public class DialogLoading extends AlertDialog {
         
 		tvDialogLoading = (TextView) findViewById(R.id.tvDialogLoading);
 		tvDialogLoading.setText(this.message);
+		//自动旋转
+		progressWheel.spin();
 	}
 
 	@Override
@@ -77,7 +54,7 @@ public class DialogLoading extends AlertDialog {
 
 			Activity activity= (Activity) mContext;
 			if(!activity.isFinishing()){
-				Debug.d(this,"show..............");
+				LogUtil.d(this, "show..............");
 				super.show();
 			}
 
@@ -91,7 +68,7 @@ public class DialogLoading extends AlertDialog {
 		if(mContext instanceof Activity){
 			Activity activity= (Activity) mContext;
 			if(!activity.isFinishing()){
-				Debug.d(this,"dismiss..............");
+				LogUtil.d(this,"dismiss..............");
 				super.dismiss();
 				if(progressWheel!=null){
 					progressWheel.stopSpinning();

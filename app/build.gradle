@@ -34,7 +34,7 @@ android {
 //            signingConfig signingConfigs.release
         }
     }
-    useLibrary 'org.apache.http.legacy'
+  //  useLibrary 'org.apache.http.legacy'
 }
 def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
@@ -57,26 +57,14 @@ dependencies {
     //    }
     //  androidTestCompile 'com.android.support.test:runner:0.3'
     //compile 'com.nineoldandroids:library:2.4.0'
+  //  provided files('libs/lib.jar')
+    compile fileTree(dir: 'libs', include: '*.jar')
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
-    compile files('libs/alipaySDK-20150818.jar')
-    compile files('libs/eventbus.jar')
-    compile files('libs/gson-2.2.4.jar')
-    compile files('libs/xUtils-2.6.14.jar')
-    compile files('libs/bmob_v3.2.0.jar')
-    compile files('libs/Bmob_Push_V0.8beta_20160315.jar')
-    compile files('libs/BmobSMS_V1.0.1_20150710.jar')
+
     compile 'junit:junit:4.12'
     compile project(path: ':photolib')
-    compile files('libs/BmobSDK_V3.3.9_0612.jar')
-    compile files('libs/universal-image-loader-1.9.5.jar')
-    provided files('libs/lib.jar')
-    compile files('libs/libammsdk.jar')
-    compile files('libs/MobCommons-2016.0301.1053.jar')
-    compile files('libs/MobTools-2016.0301.1053.jar')
-    compile files('libs/ShareSDK-Core-2.7.0.jar')
-    compile files('libs/ShareSDK-QZone-2.7.0.jar')
-    compile files('libs/mta-sdk-1.6.2.jar')
-    compile files('libs/open_sdk_r5509.jar')
-    compile files('libs/nbs.newlens.agent.jar')
+
+
+
 }

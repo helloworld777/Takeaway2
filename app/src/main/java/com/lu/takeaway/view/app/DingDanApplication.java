@@ -5,6 +5,9 @@ import android.app.Application;
 import com.lidroid.xutils.BitmapUtils;
 import com.lu.takeaway.bean.OrderBean;
 import com.lu.takeaway.bean.UserBean;
+import com.lu.takeaway.util.Constants;
+import com.lu.takeaway.util.FileUtils;
+import com.lu.takeaway.util.LogUtil;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
@@ -22,9 +25,6 @@ import cn.bmob.push.BmobPush;
 import cn.bmob.sms.BmobSMS;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobInstallation;
-import util.Constants;
-import util.Debug;
-import util.FileUtils;
 
 public class DingDanApplication extends Application {
 	private static DingDanApplication danApplication;
@@ -43,7 +43,7 @@ public class DingDanApplication extends Application {
 
 		initImageLoader();
 		initBmob();
-		Debug.d(this,"DingDanApplication.......................onCreate..............speed time:"+(System.currentTimeMillis()-start)/1000.0+" s");
+		LogUtil.d(this, "DingDanApplication.......................onCreate..............speed time:" + (System.currentTimeMillis() - start) / 1000.0 + " s");
 //		new UserPersenter().queryMaxUid(this,null);
 	}
 	private void initBmob() {

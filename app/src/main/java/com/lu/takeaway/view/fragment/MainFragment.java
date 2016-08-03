@@ -24,7 +24,6 @@ import com.lu.takeaway.persenter.FoodPersenter;
 import com.lu.takeaway.view.IFoodView;
 import com.lu.takeaway.view.adapter.LuAdapter;
 import com.lu.takeaway.view.adapter.ViewHolder;
-import com.lu.takeaway.view.widget.DialogLoading;
 import com.lu.takeaway.view.widget.xlistview.XListView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -37,9 +36,9 @@ import java.util.List;
 
 import bean.EventBean;
 import de.greenrobot.event.EventBus;
-import util.DateUtil;
-import util.LogUtil;
-import util.StringUtil;
+import com.lu.takeaway.util.DateUtil;
+import com.lu.takeaway.util.LogUtil;
+import com.lu.takeaway.util.StringUtil;
 
 @SuppressLint("NewApi")
 public class MainFragment extends BaseFragment implements IFoodView {
@@ -82,7 +81,7 @@ public class MainFragment extends BaseFragment implements IFoodView {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		dialogLoading=new DialogLoading(activity);
+//		dialogLoading=new DialogLoading(activity);
 	}
 
 	@Override
@@ -136,7 +135,7 @@ public class MainFragment extends BaseFragment implements IFoodView {
 	@Override
 	public void loadDataSucess(List<FoodBean> foodBeanList) {
 
-		showToast("loadDataSucess");
+		showToast(R.string.refresh_data_success);
 		closeLoadingDialog();
 		if(foodBeanList==null&&foodBeanList.isEmpty()){
 			return;
@@ -151,7 +150,7 @@ public class MainFragment extends BaseFragment implements IFoodView {
 
 	@Override
 	public void loadDataFaild() {
-		showToast("loadDataFaild");
+		showToast(R.string.refresh_data_faild);
 		closeLoadingDialog();
 	}
 

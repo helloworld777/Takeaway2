@@ -3,12 +3,12 @@ package bean.Manager;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.lu.takeaway.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import bean.FoodBean;
-import util.Constants;
 
 public class FoodManager {
 	public final static String url = Constants.SERVER_URL;

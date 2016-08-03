@@ -15,15 +15,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.lu.takeaway.R;
+import com.lu.takeaway.util.DialogUtil;
+import com.lu.takeaway.util.LogUtil;
+import com.lu.takeaway.util.TopNoticeDialog;
 import com.lu.takeaway.view.app.DingDanApplication;
-import com.lu.takeaway.view.widget.DialogLoading;
-
-import util.Debug;
-import util.TopNoticeDialog;
 
 public class BaseFragment extends Fragment {
     protected DingDanApplication mContext;
-    protected DialogLoading dialogLoading;
+//    protected DialogLoading dialogLoading;
 
     public void initData() {
     }
@@ -34,7 +33,7 @@ public class BaseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Debug.d(this, "onCreate()........................");
+        LogUtil.d(this, "onCreate()........................");
     }
 
     @Override
@@ -44,15 +43,15 @@ public class BaseFragment extends Fragment {
 
     public BaseFragment() {
         mContext = DingDanApplication.getDefault();
-        Debug.d(this, "BaseFragment()........................");
+        LogUtil.d(this, "BaseFragment()........................");
     }
     public void d(String msg){
-        Debug.d(this, "........................"+msg);
+        LogUtil.d(this, "........................"+msg);
     }
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        Debug.d(this, "onAttach()........................");
+        LogUtil.d(this, "onAttach()........................");
 //		dialogLoading=new DialogLoading(activity);
     }
     protected void openSoftInput(View view) {
@@ -70,20 +69,21 @@ public class BaseFragment extends Fragment {
     ;
 
     protected void showLoadingDialog() {
-        if (dialogLoading != null && !dialogLoading.isShowing()) {
-            dialogLoading.show();
-            ;
-        }
+        DialogUtil.showWaitDialog(getActivity(), null);
     }
 
     protected void closeLoadingDialog() {
-        if (dialogLoading != null && dialogLoading.isShowing()) {
-            dialogLoading.dismiss();
-        }
+//        if (dialogLoading != null && dialogLoading.isShowing()) {
+//            dialogLoading.dismiss();
+//        }
+        DialogUtil.closeAlertDialog();
     }
 
     protected void showToast(String msg) {
         TopNoticeDialog.showToast(getActivity(), msg);
+    }
+    protected void showToast(int res) {
+        TopNoticeDialog.showToast(getActivity(), res);
     }
 
     protected <T extends View> T findViewById(View view, int res) {

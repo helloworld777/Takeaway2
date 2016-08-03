@@ -34,13 +34,13 @@ import com.lu.takeaway.view.adapter.ViewHolder;
 import bean.EventBean;
 import bean.FoodBean;
 import bean.OrderBean;
-import db.FoodManager;
-import db.OrderManager;
+import com.lu.takeaway.model.db.FoodManager;
+import com.lu.takeaway.model.db.OrderManager;
 import de.greenrobot.event.EventBus;
-import util.Constants;
-import util.DateUtil;
-import util.LogUtil;
-import util.SaveDataUtil;
+import com.lu.takeaway.util.Constants;
+import com.lu.takeaway.util.DateUtil;
+import com.lu.takeaway.util.LogUtil;
+import com.lu.takeaway.util.SaveDataUtil;
 
 @ContentView(R.layout.activity_search)
 public class SearchActivity extends BaseFragmentActivity {

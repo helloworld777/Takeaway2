@@ -5,7 +5,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 
-import util.Constants;
+import com.lu.takeaway.util.Constants;
 
 /**
  * Created by lenovo on 2016/3/21.

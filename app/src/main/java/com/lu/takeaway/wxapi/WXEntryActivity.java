@@ -7,13 +7,12 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.lu.takeaway.R;
+import com.lu.takeaway.util.LogUtil;
 import com.tencent.mm.sdk.openapi.BaseReq;
 import com.tencent.mm.sdk.openapi.BaseResp;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
-
-import util.Debug;
 
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
 	
@@ -42,7 +41,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
 
 	@Override
 	public void onResp(BaseResp resp) {
-		Debug.d(this,".........................resp.errStr:"+resp.errStr+",resp.errCode"+resp.errCode);
+		LogUtil.d(this, ".........................resp.errStr:" + resp.errStr + ",resp.errCode" + resp.errCode);
 		int result = 0;
 		switch (resp.errCode) {
 		case BaseResp.ErrCode.ERR_OK:

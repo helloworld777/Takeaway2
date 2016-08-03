@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,9 @@ import com.lu.photolib.PhotoUtils;
 import com.lu.takeaway.R;
 import com.lu.takeaway.bean.UserBean;
 import com.lu.takeaway.persenter.UserPersenter;
+import com.lu.takeaway.util.Constants;
+import com.lu.takeaway.util.FileUtils;
+import com.lu.takeaway.util.SaveDataUtil;
 import com.lu.takeaway.view.IView;
 import com.lu.takeaway.view.activity.LoginActivity;
 import com.lu.takeaway.view.activity.MainActivity;
@@ -36,19 +40,12 @@ import com.lu.takeaway.view.activity.UserInfoDetailActivity;
 import com.lu.takeaway.view.app.DingDanApplication;
 import com.lu.takeaway.view.popwindow.BPopupWindow;
 import com.lu.takeaway.view.popwindow.BottomPopupWindow;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.io.File;
 
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.UploadFileListener;
 import cn.sharesdk.tencent.qzone.QZone;
-import util.Constants;
-import util.Debug;
-import util.FileUtils;
-import util.SaveDataUtil;
 
 @SuppressLint("NewApi")
 public class UserFragment extends BaseFragment implements OnClickListener, Constants, IView {
@@ -61,6 +58,7 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
     private RelativeLayout rlOrder, rlBook, rlAbout;
     private UserPersenter userPersenter;
     public static final int INTENT_REQUEST_CODE_CROP = 2;
+
     public UserFragment() {
         userPersenter = new UserPersenter();
         userPersenter.setiView(this);
@@ -120,7 +118,7 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
                 break;
             case R.id.rlAbout:
 //                ((MainActivity)getActivity()).sharedWeiXin();
-                ((MainActivity)getActivity()).showShare(getActivity(), QZone.NAME,false);
+                ((MainActivity) getActivity()).showShare(getActivity(), QZone.NAME, false);
                 break;
             case R.id.llUserInfo:
                 startActivityTransition(UserInfoDetailActivity.class);
@@ -226,14 +224,14 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
         bmobFile.upload(getActivity(), new UploadFileListener() {
             @Override
             public void onSuccess() {
-                Debug.d(getActivity(), "upload onSuccess.....................:");
+                d("upload onSuccess.....................:");
                 userBean.header_img = FILE_BASE_URL + bmobFile.getUrl();
                 userPersenter.updateUser(userBean, mContext);
             }
 
             @Override
             public void onFailure(int i, String s) {
-                Debug.d(getActivity(), "uploadonFailure code:" + i + ",.....................s:" + s);
+                d("uploadonFailure code:" + i + ",.....................s:" + s);
             }
         });
     }
@@ -311,17 +309,22 @@ public class UserFragment extends BaseFragment implements OnClickListener, Const
     public void initData() {
         d("onResume");
         isLogin = mContext.isLogin();
-        if (isLogin) {
+        if (mContext.isLogin()) {
             userBean = DingDanApplication.getDefault().getCurrenUserBean();
             tvLogin.setText(userBean.lusername);
             isLogin = true;
+            d("userBean.header_img:"+userBean.header_img);
+            if (!TextUtils.isEmpty(userBean.header_img)) {
+                mContext.getBitmapUtils().display(iv_login, userBean.header_img);
+            }
         }
-        mContext.getBitmapUtils().display(iv_login, userBean.header_img);
-        DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .displayer(new RoundedBitmapDisplayer(20)).showImageOnFail(R.mipmap.default_header)
-                .build();
-//        options.getImageOnFail(getResources());
-        ImageLoader.getInstance().displayImage(userBean.header_img,iv_login,options);
+
+
+//        DisplayImageOptions options = new DisplayImageOptions.Builder()
+//                .displayer(new RoundedBitmapDisplayer(20)).showImageOnFail(R.mipmap.default_header)
+//                .build();
+////        options.getImageOnFail(getResources());
+//        ImageLoader.getInstance().displayImage(userBean.header_img,iv_login,options);
     }
 
     @Override

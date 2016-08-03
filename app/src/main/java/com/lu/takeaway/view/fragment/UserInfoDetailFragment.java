@@ -18,7 +18,7 @@ import com.lu.takeaway.view.app.DingDanApplication;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import util.JActivityManager;
+import com.lu.takeaway.util.JActivityManager;
 
 /**
  * Created by lenovo on 2016/3/26.

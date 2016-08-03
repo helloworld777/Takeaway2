@@ -15,9 +15,9 @@ import com.lu.takeaway.persenter.UserPersenter;
 import com.lu.takeaway.view.IUserLoginView;
 import com.lu.takeaway.view.app.DingDanApplication;
 
-import util.Constants;
-import util.DataVaildUtil;
-import util.SPUtils;
+import com.lu.takeaway.util.Constants;
+import com.lu.takeaway.util.DataVaildUtil;
+import com.lu.takeaway.util.SPUtils;
 
 @ContentView(R.layout.activity_login)
 public class LoginActivity extends BaseFragmentActivity implements Constants, IUserLoginView {

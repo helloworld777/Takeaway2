@@ -16,11 +16,10 @@ import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lu.takeaway.R;
+import com.lu.takeaway.util.JActivityManager;
+import com.lu.takeaway.util.LogUtil;
+import com.lu.takeaway.util.TopNoticeDialog;
 import com.lu.takeaway.view.widget.DialogLoading;
-
-import util.Debug;
-import util.JActivityManager;
-import util.TopNoticeDialog;
 
 public abstract class BaseFragmentActivity extends FragmentActivity {
 	protected final int  requestCode=0;
@@ -97,7 +96,8 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0); //强制隐藏键盘
 	}
+
 	protected void d(String msg){
-		Debug.d(this,"......................"+msg);
+		LogUtil.d(this, "......................" + msg);
 	}
 }

@@ -1,7 +1,7 @@
 package bean;
 
 
-import util.FormatUti;
+import com.lu.takeaway.util.FormatUti;
 
 public class FoodBean 	{
 	private String name;

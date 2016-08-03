@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import com.lu.takeaway.R;
 
-import util.MD5Util;
+import com.lu.takeaway.util.MD5Util;
 
 public class RegisterUserPwdFragment extends BaseFragment{
 	

@@ -9,6 +9,8 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lu.takeaway.bean.UserBean;
 import com.lu.takeaway.model.UserModel;
+import com.lu.takeaway.util.JSONHelpUtil;
+import com.lu.takeaway.util.MD5Util;
 import com.lu.takeaway.view.IUserLoginView;
 import com.lu.takeaway.view.IUserRegisterView;
 import com.lu.takeaway.view.IView;
@@ -24,9 +26,6 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindCallback;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
-import util.Debug;
-import util.JSONHelpUtil;
-import util.MD5Util;
 
 /**
  * Created by lenovo on 2016/3/21.
@@ -168,7 +167,7 @@ public class UserPersenter extends BasePersenter {
             public void onSuccess(ResponseInfo<String> responseInfo) {
 
                 String data = responseInfo.result;
-                Debug.d(UserPersenter.this, "onSuccess...............data:" + data);
+                d("onSuccess...............data:" + data);
                 List<UserBean> userBeanList = resolveUserBean(data);
                 if (userBeanList.isEmpty()) {
                     userView.loginFaild();
@@ -181,7 +180,7 @@ public class UserPersenter extends BasePersenter {
             @Override
             public void onFailure(HttpException e, String s) {
                 e.printStackTrace();
-                Debug.d(UserPersenter.this, "onFailure...............data:" + s);
+                d("onFailure...............data:" + s);
                 userView.loginFaild();
             }
         });

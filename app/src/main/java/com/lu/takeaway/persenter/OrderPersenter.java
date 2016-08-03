@@ -9,6 +9,8 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lu.takeaway.bean.OrderBean;
 import com.lu.takeaway.model.OrderModel;
+import com.lu.takeaway.util.DateUtil;
+import com.lu.takeaway.util.JSONHelpUtil;
 import com.lu.takeaway.view.IOrderView;
 import com.lu.takeaway.view.IView;
 import com.lu.takeaway.view.app.DingDanApplication;
@@ -21,14 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
-import util.DateUtil;
-import util.Debug;
-import util.JSONHelpUtil;
 
 /**
  * Created by lenovo on 2016/3/22.
  */
-public class OrderPersenter {
+public class OrderPersenter extends BasePersenter{
 
     OrderModel orderModel=new OrderModel();
     IOrderView iOrderView;
@@ -51,8 +50,8 @@ public class OrderPersenter {
                 for(OrderBean orderBean:orderBeens){
                     maxId=(maxId>orderBean.oid?maxId:orderBean.oid);
                 }
-                Debug.d(OrderPersenter.this,"maxId:"+maxId);
-                Debug.d(OrderPersenter.this,"data:"+responseInfo.result);
+                d( "maxId:" + maxId);
+                d("data:"+responseInfo.result);
                 DingDanApplication.getDefault().setMaxOrderId(maxId);
             }
 
@@ -157,7 +156,7 @@ public class OrderPersenter {
     class CommitOrderCallBack extends RequestCallBack<String> {
         @Override
         public void onSuccess(ResponseInfo<String> responseInfo) {
-            Debug.d(OrderPersenter.this,"data:"+responseInfo.result);
+            d("data:"+responseInfo.result);
             if(iView!=null){
                 iView.loadDataSuccess();
             }
@@ -165,7 +164,7 @@ public class OrderPersenter {
 
         @Override
         public void onFailure(HttpException e, String s) {
-            Debug.d(OrderPersenter.this,"data:"+s);
+            d("data:"+s);
             e.printStackTrace();
             if(iView!=null)
                 iView.loadDataFaild();
